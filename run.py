@@ -43,6 +43,15 @@ def clear_console():
     os.system('cls' if os.name=='nt' else 'clear')
 
 
+def show_settings():
+    '''
+    Displays settings
+    '''
+    print("Settings are coming")
+    input("Press Enter to continue...")
+    main_menu()
+    clear_console()
+
 
 def main_menu():
 
@@ -62,6 +71,9 @@ Select one option:
             match option:
                 case "2":
                     show_rules(main_menu)
+                    break
+                case "3":
+                    show_settings()
                     break
             break
         else:
