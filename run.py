@@ -68,6 +68,7 @@ Select one option:
     while True:
         option = input("Select: ")
         if re.search(regex, option):
+            exit = False
             match option:
                 case "2":
                     show_rules(main_menu)
@@ -75,7 +76,20 @@ Select one option:
                 case "3":
                     show_settings()
                     break
-            break
+                case "5":
+                    while True:
+                        exit_survey = input("Do want to exit the game? Y/N\n")
+                        if re.search("^[yY]{1}(es)?$", exit_survey):
+                            print("Goodbye")
+                            exit = True
+                            break
+                        elif re.search("^[nN]{1}(o)?$", exit_survey):
+                            break
+                        else:
+                            print("Incorrect input")
+                        
+            if exit:
+                break
         else:
             print("Please select the correct option")
 
