@@ -69,7 +69,41 @@ class User():
         self.current_difficulty = current_difficulty
 
 
+USERNAME_REGEX = "^[a-zA-Z0-9]{3, 100}$"
+EMAIL_REGEX = ""
 
+
+
+def login() -> bool:
+    '''
+    Logs user in
+    '''
+    if active_user is None:
+        username = ""
+        email = ""
+        while True:
+            username = input("Please enter your username:\n")
+            if re.match(USERNAME_REGEX, username):
+                break
+            else:
+                print("Your username must be 3-100 Characters long and can only contain alphanumeric values (A-Z and 0-9)")
+
+        while True:
+            email = input("Please enter your email:\n")
+            if re.match(EMAIL_REGEX, email):
+                break
+            else:
+                print("Please enter a valid email address")
+
+        usersheet = SHEET.worksheet("user_list")
+        email_val = usersheet.findall(email)
+        print(email_val)
+        #TODO: Check if user exists
+        print("login check if user exists")
+        return True
+    else:
+        print("Already logged in")
+        return False
 
 
 _DIFFICULTIES = {
