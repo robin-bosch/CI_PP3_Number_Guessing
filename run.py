@@ -1,8 +1,9 @@
 import re
 import os
+from pprint import pprint
 import gspread
 from google.oauth2.service_account import Credentials
-from pprint import pprint
+
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -21,13 +22,57 @@ class Difficulty():
     '''
     Creates a difficulty
     '''
-    def __init__(self, rounds, min, max):
+    def __init__(self, rounds, min_value, max_value):
         self.rounds = rounds
-        self.min = min
-        self.max = max
+        self.min_value = min_value
+        self.max_value = max_value
 
 
-DIFFICULTIES = {
+active_user = None
+
+class User():
+    '''
+    Creates currently active user
+    '''
+    def __init__(self, email, username, custom_difficulties, current_difficulty):
+        self.email = email
+        self.username = username
+        self.custom_difficulties = custom_difficulties
+        self.current_difficulty = current_difficulty
+
+    
+    def update_username(self, username):
+        '''
+        Updates username and saves it to the spreadsheet
+        @param self
+        @param username
+        '''
+        #TODO: Add saving to spreadsheet and check username validity
+        self.username = username
+
+    def update_custom_difficulties(self, custom_difficulties):
+        '''
+        Updates custom made difficulties and saves it to the spreadsheet
+        @param self
+        @param custom_difficulties
+        '''
+        #TODO: Add saving to spreadsheet and check custom difficulty validity
+        self.custom_difficulties = custom_difficulties
+
+    def update_current_difficulty(self, current_difficulty):
+        '''
+        Updates current difficulty and saves it to the spreadsheet
+        @param self
+        @param current_difficulty
+        '''
+        #TODO: Add saving to spreadsheet and check difficulty validity
+        self.current_difficulty = current_difficulty
+
+
+
+
+
+_DIFFICULTIES = {
     "easy": Difficulty(5, 0 ,15),
     "medium": Difficulty(5, 0 ,15),
     "hard": Difficulty(5, 0 ,15),
@@ -37,15 +82,15 @@ DIFFICULTIES = {
 
 
 
-regex = "^[1-5]{1}$"
+OPTION_REGEX = "^[1-5]{1}$"
 
-def show_rules(showAfter):
+def show_rules(show_after):
     '''
     Displays rules than switches back to given screen after enter
     '''
     print("The rules")
     input("Press Enter to continue...")
-    showAfter()
+    show_after()
     clear_console()
 
 #Code used: https://stackoverflow.com/questions/517970/how-to-clear-the-interpreter-console
@@ -67,7 +112,9 @@ def show_settings():
 
 
 def main_menu():
-
+    '''
+    Displays main menu
+    '''
     print('''
 Welcome to NumberGuessing
 
@@ -80,7 +127,7 @@ Select one option:
     ''')
     while True:
         option = input("Select: ")
-        if re.search(regex, option):
+        if re.search(OPTION_REGEX, option):
             exit = False
             match option:
                 case "2":
@@ -107,6 +154,9 @@ Select one option:
             print("Please select the correct option")
 
 def main():
+    '''
+    Main
+    '''
     main_menu()
 
 if __name__ == "__main__":
