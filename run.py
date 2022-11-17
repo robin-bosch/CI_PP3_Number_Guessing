@@ -28,7 +28,7 @@ class Difficulty():
         self.max_value = max_value
 
 
-active_user = None
+ACTIVE_USER = None
 
 class User():
     '''
@@ -69,16 +69,17 @@ class User():
         self.current_difficulty = current_difficulty
 
 
-USERNAME_REGEX = "^[a-zA-Z0-9]{3, 100}$"
-EMAIL_REGEX = ""
-
+USERNAME_REGEX = "^[a-zA-Z0-9]{3,100}$"
+EMAIL_REGEX = "^\S+@\S+\.\S+$"
 
 
 def login() -> bool:
     '''
     Logs user in
     '''
-    if active_user is None:
+    global ACTIVE_USER
+
+    if ACTIVE_USER is None:
         username = ""
         email = ""
         while True:
@@ -96,8 +97,16 @@ def login() -> bool:
                 print("Please enter a valid email address")
 
         usersheet = SHEET.worksheet("user_list")
-        email_val = usersheet.findall(email)
-        print(email_val)
+        email_val = usersheet.find(email)
+
+        if not email_val is None:
+            print("found")
+            userrow = usersheet.row_values(email_val.row)
+            ACTIVE_USER = User(userrow[0], userrow[1], userrow[2], userrow[3])
+            print(userrow)
+        else:
+            print("Not found")
+
         #TODO: Check if user exists
         print("login check if user exists")
         return True
@@ -139,7 +148,12 @@ def show_settings():
     '''
     Displays settings
     '''
-    print("Settings are coming")
+    global ACTIVE_USER
+    
+    if ACTIVE_USER is None:
+        login()
+    
+    print("Welcome to the settings menu")
     input("Press Enter to continue...")
     main_menu()
     clear_console()
