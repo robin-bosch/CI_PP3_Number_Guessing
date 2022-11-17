@@ -105,7 +105,20 @@ def login() -> bool:
             ACTIVE_USER = User(userrow[0], userrow[1], userrow[2], userrow[3])
             print(userrow)
         else:
-            print("Not found")
+            print("This user does not exist")
+            print(f"username: {username}")
+            print(f"email: {email}")
+
+            while True:
+                register = input("Do you want to register with this data? Y/N\n")
+                if re.search("^[yY]{1}(es)?$", register):
+                    print("Register")
+                    return True
+                elif re.search("^[nN]{1}(o)?$", register):
+                    print("Returning to the main menu")
+                    return False
+                else:
+                    print("Incorrect input")
 
         #TODO: Check if user exists
         print("login check if user exists")
@@ -114,6 +127,29 @@ def login() -> bool:
         print("Already logged in")
         return False
 
+
+
+def show_register():
+    '''
+    Register new user
+    '''
+    username = ""
+    email = ""
+    while True:
+        username = input("Please enter a username (Your username can be changed later):\n")
+        if re.match(USERNAME_REGEX, username):
+            break
+        else:
+            print("Your username must be 3-100 Characters long and can only contain alphanumeric values (A-Z and 0-9)")
+
+    while True:
+        email = input("Please enter your email:\n")
+        if re.match(EMAIL_REGEX, email):
+            break
+        else:
+            print("Please enter a valid email address")
+
+    usersheet = SHEET.worksheet("user_list")
 
 _DIFFICULTIES = {
     "easy": Difficulty(5, 0 ,15),
@@ -149,7 +185,7 @@ def show_settings():
     Displays settings
     '''
     global ACTIVE_USER
-    
+
     if ACTIVE_USER is None:
         login()
     
