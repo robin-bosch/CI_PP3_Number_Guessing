@@ -104,6 +104,8 @@ class Game():
             self.number = set_number
 
     def next_round(self):
+        if self.guessing == Guesser.COMPUTER:
+
         self.rounds_left = self.rounds_left-1
 
     def start(self):
@@ -235,7 +237,29 @@ def show_settings():
         login()
     
     print("Welcome to the settings menu")
-    input("Press Enter to continue...")
+    print('''Select one option:
+1. Difficulty setting
+2. Change username
+3. Back to main menu''')
+    while True:
+        option = input("Select: ")
+        if re.search(OPTION_REGEX, option):
+            exit = False
+            match option:
+                case "1":
+                    print("Show dfficulty setting")
+                    break
+                case "2":
+                    print("change username")
+                    break
+                case "3":
+                    main_menu()
+                    break
+                        
+            if exit:
+                break
+        else:
+            print("Please select the correct option")
     main_menu()
     clear_console()
 
