@@ -1,8 +1,17 @@
+from enum import Enum
 import re
 import os
 from pprint import pprint
 import gspread
 from google.oauth2.service_account import Credentials
+
+
+class Guesser(Enum):
+    '''
+    Enum for the guesser
+    '''
+    COMPUTER = "computer"
+    USER = "user"
 
 
 SCOPE = [
@@ -67,6 +76,13 @@ class User():
         '''
         #TODO: Add saving to spreadsheet and check difficulty validity
         self.current_difficulty = current_difficulty
+
+
+# class Game():
+#     '''
+    
+#     '''
+#     __init__(self, difficulty, rounds_left, guessing)
 
 
 USERNAME_REGEX = "^[a-zA-Z0-9]{3,100}$"
