@@ -226,6 +226,22 @@ def clear_console():
     '''
     os.system('cls' if os.name=='nt' else 'clear')
 
+def change_username():
+    '''
+    Asks for new username and calls the update username function in the user object
+    '''
+    while True:
+        new_username = input("Please enter your new username:\n")
+        if new_username == "exit":
+            show_settings()
+            break
+        elif re.match(USERNAME_REGEX, username):
+            ACTIVE_USER.update_username(new_username)
+            print("Username changed")
+            show_settings()
+            break
+        else:
+            print("Your username must be 3-100 Characters long and can only contain alphanumeric values (A-Z and 0-9)")
 
 def show_settings():
     '''
