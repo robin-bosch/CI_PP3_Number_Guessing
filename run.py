@@ -1,28 +1,25 @@
 import re
 import os
 
+class Difficulty():
+    '''
+    Creates a difficulty
+    '''
+    def __init__(self, rounds, min, max):
+        self.rounds = rounds
+        self.min = min
+        self.max = max
+
+
 DIFFICULTIES = {
-    "easy": {
-        "rounds": 5,
-        "min": 0,
-        "max": 10
-    },
-    "medium": {
-        "rounds": 10,
-        "min": 0,
-        "max": 10
-    },
-    "hard": {
-        "rounds": 5,
-        "min": 0,
-        "max": 10
-    },
-    "extreme": {
-        "rounds": 5,
-        "min": 0,
-        "max": 10
-    }
+    "easy": Difficulty(5, 0 ,15),
+    "medium": Difficulty(5, 0 ,15),
+    "hard": Difficulty(5, 0 ,15),
+    "extreme": Difficulty(5, 0 ,15),
 }
+
+
+
 
 regex = "^[1-5]{1}$"
 
