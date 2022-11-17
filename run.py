@@ -1,4 +1,5 @@
 from enum import Enum
+import random
 import re
 import os
 from pprint import pprint
@@ -78,11 +79,39 @@ class User():
         self.current_difficulty = current_difficulty
 
 
-# class Game():
-#     '''
-    
-#     '''
-#     __init__(self, difficulty, rounds_left, guessing)
+class Game():
+    '''
+    Creates game loop
+    '''
+    def __init__(self, difficulty, guessing):
+        self.difficulty = difficulty
+        self.rounds_left = difficulty.rounds
+        self.guessing = guessing
+        self.number = 0
+
+    def prepare_game(self):
+        if self.guessing == Guesser.COMPUTER:
+            self.number = random.randrange(self.difficulty.min, self.difficulty.max)
+        else:
+            set_number = None
+            while True:
+                set_number = input(f"Please put in a number between {self.difficulty.min} and {self.difficulty.max}:")
+
+                if set_number >= self.difficulty.min and set_number <= self.difficulty.max:
+                    break
+                else:
+                    print(f"Invalid number: Your number must be between {self.difficulty.min} and {self.difficulty.max}:")
+            self.number = set_number
+
+    def next_round(self):
+        self.rounds_left = self.rounds_left-1
+
+    def start(self):
+        '''
+        
+        '''
+        self.prepare_game()
+
 
 
 USERNAME_REGEX = "^[a-zA-Z0-9]{3,100}$"
