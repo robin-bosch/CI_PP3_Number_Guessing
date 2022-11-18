@@ -6,6 +6,8 @@ from pprint import pprint
 import gspread
 from google.oauth2.service_account import Credentials
 
+# from game import ComputerGuesserGame, UserGuesserGame
+
 
 class Guesser(Enum):
     '''
@@ -90,7 +92,6 @@ def yes_no(question) -> bool:
             print("Incorrect input")
 
 
-
 class Game():
     '''
     Creates game loop
@@ -102,6 +103,9 @@ class Game():
         self.number = 0
 
     def prepare_game(self):
+        '''
+        Prepares game
+        '''
         if self.guessing == Guesser.COMPUTER:
             self.number = random.randrange(self.difficulty.min, self.difficulty.max)
         else:
@@ -116,6 +120,9 @@ class Game():
             self.number = set_number
 
     def next_round(self):
+        '''
+        Starts the next round
+        '''
         if self.guessing == Guesser.COMPUTER:
             #TODO Replace with proper number
             print("I am guessing: 5?\n ")
@@ -133,12 +140,11 @@ class Game():
                     print("You lost")
         else:
             input("Guess the number: ")
-
-        
+     
 
     def start(self):
         '''
-        
+        Starts the game with the user guessing
         '''
         self.prepare_game()
 
@@ -151,7 +157,7 @@ class ComputerGuesserGame(Game):
         super().__init__(difficulty, Guesser.COMPUTER)
 
     def prepare_game(self):
-        self.number = random.randrange(self.difficulty.min, self.difficulty.max)
+        self.number = random.randrange(self.difficulty.min_value, self.difficulty.max_value)
 
     def next_round(self):
         #TODO Replace with proper number
@@ -195,6 +201,7 @@ class UserGuesserGame(Game):
             self.number = set_number
 
 
+
 USERNAME_REGEX = "^[a-zA-Z0-9]{3,100}$"
 EMAIL_REGEX = "^\S+@\S+\.\S+$"
 
@@ -215,10 +222,12 @@ def start_game():
             if re.search(OPTION_REGEX, option):
                 match option:
                     case "1":
-                        ComputerGuesserGame(ACTIVE_USER.difficulty)
+                        new_game = ComputerGuesserGame(_DIFFICULTIES[ACTIVE_USER.current_difficulty])
+                        new_game.start()
                         break
                     case "2":
-                        UserGuesserGame(ACTIVE_USER.difficulty)
+                        new_game = UserGuesserGame(_DIFFICULTIES[ACTIVE_USER.current_difficulty])
+                        new_game.start()
                         break
                     case "3":
                         main_menu()
@@ -230,6 +239,7 @@ def start_game():
 
         if login_prompt:
             login()
+            start_game()
         else:
             main_menu()
 
@@ -239,8 +249,9 @@ def login() -> bool:
     '''
     Logs user in
     '''
+    global ACTIVE_USER
 
-    if is_logged_in():
+    if not is_logged_in():
         username = ""
         email = ""
         while True:
@@ -270,16 +281,13 @@ def login() -> bool:
             print(f"username: {username}")
             print(f"email: {email}")
 
-            while True:
-                register = input("Do you want to register with this data? Y/N\n")
-                if re.search("^[yY]{1}(es)?$", register):
-                    print("Register")
-                    return True
-                elif re.search("^[nN]{1}(o)?$", register):
-                    print("Returning to the main menu")
-                    return False
-                else:
-                    print("Incorrect input")
+            if yes_no("Do you want to register with this data? Y/N\n"):
+                print("Register")
+                usersheet.append_row([email, username, "lul", "easy"])
+                return True
+            else:
+                print("Returning to the main menu")
+                return False
 
         #TODO: Check if user exists
         print("login check if user exists")
@@ -418,6 +426,9 @@ Select one option:
                     break
                 case "3":
                     show_settings()
+                    break
+                case "4":
+                    start_game()
                     break
                 case "5":
                     while True:
