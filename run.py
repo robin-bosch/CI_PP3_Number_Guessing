@@ -205,28 +205,33 @@ def is_logged_in() -> bool:
     return False if ACTIVE_USER is None else True
 
 def start_game():
-    #TODO Add login check
-        if is_logged_in():
-            while True:
-                option = input("Select: ")
-                if re.search(OPTION_REGEX, option):
-                    exit = False
-                    match option:
-                        case "1":
-                            ComputerGuesserGame(ACTIVE_USER.difficulty)
-                            break
-                        case "2":
-                            UserGuesserGame(ACTIVE_USER.difficulty)
-                            break
-                        case "3":
-                            main_menu()
-                                
-                    if exit:
+    if is_logged_in():
+        while True:
+            print('''Select one option:
+1. Computer guesses
+2. User guesses
+3. Back to main menu''')
+            option = input("Select: ")
+            if re.search(OPTION_REGEX, option):
+                match option:
+                    case "1":
+                        ComputerGuesserGame(ACTIVE_USER.difficulty)
                         break
-                else:
-                    print("Please select the correct option")
+                    case "2":
+                        UserGuesserGame(ACTIVE_USER.difficulty)
+                        break
+                    case "3":
+                        main_menu()
+            else:
+                print("Please select the correct option")
+    else:
+        print("You are not logged in")
+        login_prompt = yes_no("You need to login to play, do you want to login? Y/N\n")
+
+        if login_prompt:
+            login()
         else:
-            print("You are not logged in")
+            main_menu()
 
 
 
@@ -234,9 +239,8 @@ def login() -> bool:
     '''
     Logs user in
     '''
-    global ACTIVE_USER
 
-    if ACTIVE_USER is None:
+    if is_logged_in():
         username = ""
         email = ""
         while True:
