@@ -79,6 +79,18 @@ class User():
         self.current_difficulty = current_difficulty
 
 
+def yes_no(question) -> bool:
+    while True:
+        register = input(question)
+        if re.search("^[yY]{1}(es)?$", register):
+            return True
+        elif re.search("^[nN]{1}(o)?$", register):
+            return False
+        else:
+            print("Incorrect input")
+
+
+
 class Game():
     '''
     Creates game loop
@@ -105,8 +117,24 @@ class Game():
 
     def next_round(self):
         if self.guessing == Guesser.COMPUTER:
+            #TODO Replace with proper number
+            print("I am guessing: 5?\n ")
+            answer_correct = yes_no("Is it correct? Y/N")
 
-        self.rounds_left = self.rounds_left-1
+            if answer_correct:
+                print("I won")
+            else:
+                if self.rounds_left > 0:
+                    self.rounds_left = self.rounds_left-1
+
+                    print("Next round: ")
+                    self.next_round()
+                else:
+                    print("You lost")
+        else:
+            input("Guess the number: ")
+
+        
 
     def start(self):
         '''
@@ -114,6 +142,35 @@ class Game():
         '''
         self.prepare_game()
 
+
+class ComputerGuesserGame(Game):
+    '''
+    Create game with the computer guessing
+    '''
+    def __init__(self, difficulty):
+        super().__init__(difficulty, Guesser.COMPUTER)
+
+    def prepare_game(self):
+        self.number = random.randrange(self.difficulty.min, self.difficulty.max)
+
+
+class UserGuesserGame(Game):
+    '''
+    Create game with the computer guessing
+    '''
+    def __init__(self, difficulty):
+        super().__init__(difficulty, Guesser.USER)
+
+    def prepare_game(self):
+        set_number = None
+        while True:
+            set_number = input(f"Please put in a number between {self.difficulty.min} and {self.difficulty.max}:")
+
+            if set_number >= self.difficulty.min and set_number <= self.difficulty.max:
+                break
+            else:
+                print(f"Invalid number: Your number must be between {self.difficulty.min} and {self.difficulty.max}:")
+            self.number = set_number
 
 
 USERNAME_REGEX = "^[a-zA-Z0-9]{3,100}$"
@@ -235,7 +292,7 @@ def change_username():
         if new_username == "exit":
             show_settings()
             break
-        elif re.match(USERNAME_REGEX, username):
+        elif re.match(USERNAME_REGEX, new_username):
             ACTIVE_USER.update_username(new_username)
             print("Username changed")
             show_settings()
