@@ -46,7 +46,8 @@ class User():
     '''
     Creates currently active user
     '''
-    def __init__(self, email, username, custom_difficulties, current_difficulty):
+    def __init__(self, column, email, username, custom_difficulties, current_difficulty):
+        self.column = column
         self.email = email
         self.username = username
         self.custom_difficulties = custom_difficulties
@@ -60,6 +61,7 @@ class User():
         @param username
         '''
         #TODO: Add saving to spreadsheet and check username validity
+        
         self.username = username
 
     def update_custom_difficulties(self, custom_difficulties):
@@ -244,7 +246,6 @@ def start_game():
             main_menu()
 
 
-
 def login() -> bool:
     '''
     Logs user in
@@ -274,7 +275,7 @@ def login() -> bool:
         if not email_val is None:
             print("found")
             userrow = usersheet.row_values(email_val.row)
-            ACTIVE_USER = User(userrow[0], userrow[1], userrow[2], userrow[3])
+            ACTIVE_USER = User(email_val.row, userrow[0], userrow[1], userrow[2], userrow[3])
             print(userrow)
         else:
             print("This user does not exist")
@@ -283,7 +284,10 @@ def login() -> bool:
 
             if yes_no("Do you want to register with this data? Y/N\n"):
                 print("Register")
-                usersheet.append_row([email, username, "lul", "easy"])
+                usersheet.append_row([email, username, "{}", "easy"])
+                userrow_num = usersheet.find(email)
+                userrow_val = usersheet.row_values(userrow_num.row)
+                ACTIVE_USER = User(userrow_num.row, userrow_val[0], userrow_val[1], userrow_val[2], userrow_val[3])
                 return True
             else:
                 print("Returning to the main menu")
@@ -348,7 +352,7 @@ def clear_console():
     '''
     os.system('cls' if os.name=='nt' else 'clear')
 
-def change_username():
+def change_username_setting():
     '''
     Asks for new username and calls the update username function in the user object
     '''
@@ -388,7 +392,7 @@ def show_settings():
                     print("Show dfficulty setting")
                     break
                 case "2":
-                    print("change username")
+                    change_username_setting()
                     break
                 case "3":
                     main_menu()
