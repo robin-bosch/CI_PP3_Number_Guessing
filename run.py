@@ -153,6 +153,28 @@ class ComputerGuesserGame(Game):
     def prepare_game(self):
         self.number = random.randrange(self.difficulty.min, self.difficulty.max)
 
+    def next_round(self):
+        #TODO Replace with proper number
+        print("I am guessing: 5?\n ")
+        answer_correct = yes_no("Is it correct? Y/N")
+
+        if answer_correct:
+            print("I won")
+        else:
+            if self.rounds_left > 0:
+                self.rounds_left = self.rounds_left-1
+
+                print("Next round: ")
+                self.next_round()
+            else:
+                print("You lost")
+
+    def start(self):
+        '''
+        Start the game of the computer guessing
+        '''
+        self.prepare_game()
+
 
 class UserGuesserGame(Game):
     '''
@@ -175,6 +197,37 @@ class UserGuesserGame(Game):
 
 USERNAME_REGEX = "^[a-zA-Z0-9]{3,100}$"
 EMAIL_REGEX = "^\S+@\S+\.\S+$"
+
+def is_logged_in() -> bool:
+    '''
+    Checks if the user is logged in
+    '''
+    return False if ACTIVE_USER is None else True
+
+def start_game():
+    #TODO Add login check
+        if is_logged_in():
+            while True:
+                option = input("Select: ")
+                if re.search(OPTION_REGEX, option):
+                    exit = False
+                    match option:
+                        case "1":
+                            ComputerGuesserGame(ACTIVE_USER.difficulty)
+                            break
+                        case "2":
+                            UserGuesserGame(ACTIVE_USER.difficulty)
+                            break
+                        case "3":
+                            main_menu()
+                                
+                    if exit:
+                        break
+                else:
+                    print("Please select the correct option")
+        else:
+            print("You are not logged in")
+
 
 
 def login() -> bool:
