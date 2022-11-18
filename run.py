@@ -46,8 +46,8 @@ class User():
     '''
     Creates currently active user
     '''
-    def __init__(self, column, email, username, custom_difficulties, current_difficulty):
-        self.column = column
+    def __init__(self, row, email, username, custom_difficulties, current_difficulty):
+        self.row = row
         self.email = email
         self.username = username
         self.custom_difficulties = custom_difficulties
@@ -60,8 +60,7 @@ class User():
         @param self
         @param username
         '''
-        #TODO: Add saving to spreadsheet and check username validity
-        
+        SHEET.worksheet("user_list").update_cell(self.row, 2, username)
         self.username = username
 
     def update_custom_difficulties(self, custom_difficulties):
@@ -79,7 +78,7 @@ class User():
         @param self
         @param current_difficulty
         '''
-        #TODO: Add saving to spreadsheet and check difficulty validity
+        SHEET.worksheet("user_list").update_cell(self.current_difficulty, 4, current_difficulty)
         self.current_difficulty = current_difficulty
 
 
