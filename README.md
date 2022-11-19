@@ -1,31 +1,85 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Number Guessing
 
-Welcome USER_NAME,
+(Developer: Robin Bosch)
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **August 17, 2021**
+![Mockup HMS](docs/mockup/mockup.png)
 
-## Reminders
+[View live site]("")
 
-* Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* Do not edit any of the other files or your code may not deploy properly
+## Table of Contents
 
-## Creating the Heroku app
+1. [Project Goals](#project-goals)
+    1. [User Goals](#user-goals)
+    2. [Site Owner Goals](#site-owner-goals)
+2. [User Experience](#user-experience)
+    1. [Target Audience](#target-audience)
+    2. [User Stories](#user-stories)
+    3. [User Manual](#user-manual)
+3. [Technical Design](#technical-design)
+    1. [Flowchart](#flowchart)
+    2. [Data Models](#data-models)
+4. [Features](#features)
+5. [Technologies Used](#technologies-used)
+    1. [Languages](#languages)
+    2. [Frameworks](#frameworks)
+    3. [Tools](#tools)
+6. [Validation and Testing](#validation-and-testing)
+    1. [Python Validation](#python-validation)
+    2. [Testing user stories](#testing-user-stories)
+7. [Bugs](#bugs)
+8. [Deployment](#deployment)
+9. [Credits](#credits)
+    1. [Media](#media)
+    2. [Code](#code)
+    3. [Acknowledgements](#acknowledgements)
+10. [License](#license)
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+## Project Goals
 
-1. `heroku/python`
-2. `heroku/nodejs`
+### User Goals
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+### Site Owner Goals
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+## User Experience
 
-Connect your GitHub repository and deploy as normal.
+### Target Audience
 
-## Constraints
+### User Stories
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
+### User Manual
 
------
-Happy coding!
+## Technical Design
+
+### Flowchart
+
+### Data Models
+
+## Features
+
+## Technologies Used
+
+### Languages
+
+### Frameworks
+
+### Tools
+
+## Validation and Testing
+
+### Python Validation
+
+### Testing user stories
+
+## Bugs
+
+## Deployment
+
+## Credits
+
+### Media
+
+### Code
+
+### Acknowledgements
+
+## License
