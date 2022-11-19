@@ -3,6 +3,7 @@ import random
 import re
 from classes.Game import Game
 from utils.enums import Guesser
+import utils.menus as menus
 
 
 class UserGuessingGame(Game):
@@ -58,18 +59,12 @@ class UserGuessingGame(Game):
             if re.search("^[1-2]{1}$", user_selection):
                 match user_selection:
                     case "1":
-                        #TODO: Is there a better solution to this circular import problem? Find one
-                        from run import start_game
-                        start_game()
+                        menus.start_game()
                     case "2":
-                        #TODO: Is there a better solution to this circular import problem? Find one
-                        from run import main_menu
-                        main_menu()
+                        menus.main_menu()
             else:
                 print("Please select the correct option")
 
-
-    
     def prepare_game(self):
         '''
         Prepares the game with a random number for the user to guess

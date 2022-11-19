@@ -2,7 +2,8 @@ import random
 import re
 from classes.Game import Game
 from utils.enums import Guesser
-from utils.inputs import yes_no
+import utils.inputs as inputs
+import utils.menus as menus
 
 
 class ComputerGuessingGame(Game):
@@ -40,16 +41,15 @@ class ComputerGuessingGame(Game):
         '''
         Next round of the computer guessing -> Yes the computer could do this all by itself but then it would be no fun!
         '''
-        # Guesses number in the middle of the min and max value with a deviation of +/- 20%
+        # Guesses number in the middle of the min and max value
+        # with a deviation of +/- 20%
         random_number = self.guessed_min + round(((self.guessed_max - self.guessed_min) / 2) * random.uniform(0.8, 1.2))
         print(f"I am guessing: {random_number}? \n")
-        answer_correct = yes_no("Is it correct?")
+        answer_correct = inputs.yes_no("Is it correct?")
 
         if not answer_correct and self.number == random_number:
             print("You liar! Someone told me that number is correct! I am not playing with a cheater, back to the menu with you!")
-            #TODO: Is there a better solution to this circular import problem? Find one
-            from run import main_menu
-            main_menu()
+            menus.main_menu()
 
         elif answer_correct:
             self.game_end(False)
@@ -73,7 +73,6 @@ class ComputerGuessingGame(Game):
             else:
                 self.game_end(False)
 
-
     def game_end(self, user_won):
         '''
         Shows the game end screen
@@ -84,20 +83,18 @@ class ComputerGuessingGame(Game):
             print("I won, yay!")
 
         while True:
-            print('''Do you want to play another round or do you want to go back to the menu?\n
-1. Play again
-2. Back to the menu''')
+            print(
+                '''Do you want to play another round or do you 
+                want to go back to the menu?\n
+                1. Play again
+                2. Back to the menu''')
             user_selection = input("Select: ")
             if re.search("^[1-2]{1}$", user_selection):
                 match user_selection:
                     case "1":
-                        #TODO: Is there a better solution to this circular import problem? Find one
-                        from run import start_game
-                        start_game()
+                        menus.start_game()
                     case "2":
-                        #TODO: Is there a better solution to this circular import problem? Find one
-                        from run import main_menu
-                        main_menu()
+                        menus.main_menu()
             else:
                 print("Please select the correct option")
 

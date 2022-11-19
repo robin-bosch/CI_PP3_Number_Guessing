@@ -2,7 +2,7 @@
 
 (Developer: Robin Bosch)
 
-![Mockup HMS](docs/mockup/mockup.png)
+![Mockup Number Guessing](docs/mockup/mockup.png)
 
 [View live site]("")
 

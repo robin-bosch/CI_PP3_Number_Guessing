@@ -1,4 +1,4 @@
-from utils.worksheet import USER_LIST
+import utils.worksheet as worksheet
 
 
 class User():
@@ -12,14 +12,13 @@ class User():
         self.custom_difficulties = custom_difficulties
         self.current_difficulty = current_difficulty
 
-    
     def update_username(self, username):
         '''
         Updates username and saves it to the spreadsheet
         @param self
         @param username
         '''
-        USER_LIST.update_cell(self.row, 2, username)
+        worksheet.USER_LIST.update_cell(self.row, 2, username)
         self.username = username
 
     def update_custom_difficulties(self, custom_difficulties):
@@ -28,7 +27,7 @@ class User():
         @param self
         @param custom_difficulties
         '''
-        #TODO: Add saving to spreadsheet and check custom difficulty validity
+        # TODO: Add saving to spreadsheet and check custom difficulty validity
         self.custom_difficulties = custom_difficulties
 
     def update_current_difficulty(self, current_difficulty):
@@ -37,5 +36,17 @@ class User():
         @param self
         @param current_difficulty
         '''
-        USER_LIST.update_cell(self.row, 4, current_difficulty)
+        worksheet.USER_LIST.update_cell(self.row, 4, current_difficulty)
         self.current_difficulty = current_difficulty
+
+
+USER = None
+
+
+def get_user():
+    return USER
+
+
+def set_user(new_user):
+    global USER
+    USER = new_user
