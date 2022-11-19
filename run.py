@@ -295,37 +295,31 @@ def main_menu():
 Welcome to NumberGuessing
 
 Select one option:
-1. Help
-2. Rules
-3. Settings
-4. Start game
+1. Start game
+2. Help
+3. Rules
+4. Settings
 5. Exit
     ''')
     while True:
         option = input("Select: ")
         if re.search(OPTION_REGEX, option):
             match option:
-                case "2":
-                    show_rules(main_menu)
-                    break
-                case "3":
-                    show_settings()
-                    break
-                case "4":
+                case "1":
                     start_game()
-                    break
+                case "2":
+                    print("Help is coming! At some point...")
+                case "3":
+                    show_rules(main_menu)
+                case "4":
+                    show_settings()
                 case "5":
-                    while True:
-                        exit_survey = input("Do want to exit the game? Y/N\n")
-                        if re.search("^[yY]{1}(es)?$", exit_survey):
-                            print("Goodbye")
-                            break
-                        elif re.search("^[nN]{1}(o)?$", exit_survey):
-                            break
-                        else:
-                            print("Incorrect input")
+                    if yes_no("Do want to exit the game?"):
+                        print("Goodbye")
+                        break
         else:
             print("Please select the correct option")
+
 
 def main():
     '''
