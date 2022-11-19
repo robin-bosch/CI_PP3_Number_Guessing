@@ -1,33 +1,18 @@
-from enum import Enum
 import json
 import random
 import re
 import os
-from pprint import pprint
-import gspread
-from google.oauth2.service_account import Credentials
+
+from classes.ComputerGuessingGame import ComputerGuessingGame
+from classes.User import User
+from classes.UserGuessingGame import UserGuessingGame
+from utils.inputs import take_text_input, yes_no
+from utils.worksheet import USER_LIST
+
 
 # from game import ComputerGuesserGame, UserGuesserGame
 
 
-class Guesser(Enum):
-    '''
-    Enum for the guesser
-    '''
-    COMPUTER = "computer"
-    USER = "user"
-
-
-SCOPE = [
-    "https://www.googleapis.com/auth/spreadsheets",
-    "https://www.googleapis.com/auth/drive.file",
-    "https://www.googleapis.com/auth/drive"
-]
-
-CREDS = Credentials.from_service_account_file('creds.json')
-SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-SHEET = GSPREAD_CLIENT.open('number_guessing')
 
 
 
@@ -40,184 +25,14 @@ class Difficulty():
         self.min_value = min_value
         self.max_value = max_value
 
+_DIFFICULTIES = {
+    "easy": Difficulty(5, 0 ,15),
+    "medium": Difficulty(5, 0 ,15),
+    "hard": Difficulty(5, 0 ,15),
+    "extreme": Difficulty(5, 0 ,15),
+}
 
 ACTIVE_USER = None
-
-class User():
-    '''
-    Creates currently active user
-    '''
-    def __init__(self, row, email, username, custom_difficulties, current_difficulty):
-        self.row = row
-        self.email = email
-        self.username = username
-        self.custom_difficulties = custom_difficulties
-        self.current_difficulty = current_difficulty
-
-    
-    def update_username(self, username):
-        '''
-        Updates username and saves it to the spreadsheet
-        @param self
-        @param username
-        '''
-        SHEET.worksheet("user_list").update_cell(self.row, 2, username)
-        self.username = username
-
-    def update_custom_difficulties(self, custom_difficulties):
-        '''
-        Updates custom made difficulties and saves it to the spreadsheet
-        @param self
-        @param custom_difficulties
-        '''
-        #TODO: Add saving to spreadsheet and check custom difficulty validity
-        self.custom_difficulties = custom_difficulties
-
-    def update_current_difficulty(self, current_difficulty):
-        '''
-        Updates current difficulty and saves it to the spreadsheet
-        @param self
-        @param current_difficulty
-        '''
-        SHEET.worksheet("user_list").update_cell(self.current_difficulty, 4, current_difficulty)
-        self.current_difficulty = current_difficulty
-
-# Section of input functions
-def yes_no(question) -> bool:
-    '''
-    Display simple yes or no question in the terminal
-    '''
-    while True:
-        register = input(question)
-        if re.search("^[yY]{1}(es)?$", register):
-            return True
-        elif re.search("^[nN]{1}(o)?$", register):
-            return False
-        else:
-            print("Incorrect input")
-
-def take_text_input(input_prompt, check_regex, failure_message) -> str:
-    '''
-    Takes the input with a given regex
-    '''
-    while True:
-        input_val = input(input_prompt + " or exit to get back to the main menu:\n")
-        if input_val == "exit":
-            main_menu()
-        elif re.match(check_regex, input_val):
-            return input_val
-        else:
-            print(failure_message)
-
-
-class Game():
-    '''
-    Creates game loop
-    '''
-    def __init__(self, difficulty, guessing):
-        self.difficulty = difficulty
-        self.rounds_left = difficulty.rounds
-        self.guessing = guessing
-        self.number = 0
-
-    def prepare_game(self):
-        '''
-        Prepares game
-        '''
-        if self.guessing == Guesser.COMPUTER:
-            self.number = random.randrange(self.difficulty.min, self.difficulty.max)
-        else:
-            set_number = None
-            while True:
-                set_number = input(f"Please put in a number between {self.difficulty.min} and {self.difficulty.max}:")
-
-                if set_number >= self.difficulty.min and set_number <= self.difficulty.max:
-                    break
-                else:
-                    print(f"Invalid number: Your number must be between {self.difficulty.min} and {self.difficulty.max}:")
-            self.number = set_number
-
-    def next_round(self):
-        '''
-        Starts the next round
-        '''
-        if self.guessing == Guesser.COMPUTER:
-            #TODO Replace with proper number
-            print("I am guessing: 5?\n ")
-            answer_correct = yes_no("Is it correct? Y/N")
-
-            if answer_correct:
-                print("I won")
-            else:
-                if self.rounds_left > 0:
-                    self.rounds_left = self.rounds_left-1
-
-                    print("Next round: ")
-                    self.next_round()
-                else:
-                    print("You lost")
-        else:
-            input("Guess the number: ")
-     
-
-    def start(self):
-        '''
-        Starts the game with the user guessing
-        '''
-        self.prepare_game()
-
-
-class ComputerGuesserGame(Game):
-    '''
-    Create game with the computer guessing
-    '''
-    def __init__(self, difficulty):
-        super().__init__(difficulty, Guesser.COMPUTER)
-
-    def prepare_game(self):
-        self.number = random.randrange(self.difficulty.min_value, self.difficulty.max_value)
-
-    def next_round(self):
-        #TODO Replace with proper number
-        print("I am guessing: 5?\n ")
-        answer_correct = yes_no("Is it correct? Y/N")
-
-        if answer_correct:
-            print("I won")
-        else:
-            if self.rounds_left > 0:
-                self.rounds_left = self.rounds_left-1
-
-                print("Next round: ")
-                self.next_round()
-            else:
-                print("You lost")
-
-    def start(self):
-        '''
-        Start the game of the computer guessing
-        '''
-        self.prepare_game()
-
-
-class UserGuesserGame(Game):
-    '''
-    Create game with the computer guessing
-    '''
-    def __init__(self, difficulty):
-        super().__init__(difficulty, Guesser.USER)
-
-    def prepare_game(self):
-        set_number = None
-        while True:
-            set_number = input(f"Please put in a number between {self.difficulty.min} and {self.difficulty.max}:")
-
-            if set_number >= self.difficulty.min and set_number <= self.difficulty.max:
-                break
-            else:
-                print(f"Invalid number: Your number must be between {self.difficulty.min} and {self.difficulty.max}:")
-            self.number = set_number
-
 
 
 USERNAME_REGEX = "^[a-zA-Z0-9]{3,100}$"
@@ -240,11 +55,11 @@ def start_game():
             if re.search(OPTION_REGEX, option):
                 match option:
                     case "1":
-                        new_game = ComputerGuesserGame(_DIFFICULTIES[ACTIVE_USER.current_difficulty])
+                        new_game = ComputerGuessingGame(_DIFFICULTIES[ACTIVE_USER.current_difficulty])
                         new_game.start()
                         break
                     case "2":
-                        new_game = UserGuesserGame(_DIFFICULTIES[ACTIVE_USER.current_difficulty])
+                        new_game = UserGuessingGame(_DIFFICULTIES[ACTIVE_USER.current_difficulty])
                         new_game.start()
                         break
                     case "3":
@@ -293,12 +108,12 @@ def login() -> bool:
             #     else:
             #         print("Please enter a valid email address")
 
-            usersheet = SHEET.worksheet("user_list")
-            email_val = usersheet.find(email)
+            # usersheet = SHEET.worksheet("user_list")
+            email_val = USER_LIST.find(email)
 
             if not email_val is None:
                 print("found")
-                userrow = usersheet.row_values(email_val.row)
+                userrow = USER_LIST.row_values(email_val.row)
                 ACTIVE_USER = User(email_val.row, userrow[0], userrow[1], userrow[2], userrow[3])
                 print(userrow)
             else:
@@ -308,9 +123,9 @@ def login() -> bool:
 
                 if yes_no("Do you want to register with this data? Y/N\n"):
                     print("Register")
-                    usersheet.append_row([email, username, "{}", "easy"])
-                    userrow_num = usersheet.find(email)
-                    userrow_val = usersheet.row_values(userrow_num.row)
+                    USER_LIST.append_row([email, username, "{}", "easy"])
+                    userrow_num = USER_LIST.find(email)
+                    userrow_val = USER_LIST.row_values(userrow_num.row)
                     ACTIVE_USER = User(userrow_num.row, userrow_val[0], userrow_val[1], userrow_val[2], userrow_val[3])
                     return True
                 else:
@@ -346,14 +161,7 @@ def show_register():
         else:
             print("Please enter a valid email address")
 
-    usersheet = SHEET.worksheet("user_list")
 
-_DIFFICULTIES = {
-    "easy": Difficulty(5, 0 ,15),
-    "medium": Difficulty(5, 0 ,15),
-    "hard": Difficulty(5, 0 ,15),
-    "extreme": Difficulty(5, 0 ,15),
-}
 
 
 
@@ -361,6 +169,9 @@ _DIFFICULTIES = {
 OPTION_REGEX = "^[1-5]{1}$"
 
 def show_custom_difficulties():
+    '''
+    Show custom difficulties
+    '''
     print("Choose a difficulty to delete or add a new one")
     difficulty_list = json.loads(ACTIVE_USER.custom_difficulties)
     for key in json.loads(ACTIVE_USER.custom_difficulties).keys():
@@ -369,7 +180,6 @@ def show_custom_difficulties():
     while True:
         option = input("Select: ")
         if re.search(OPTION_REGEX, option):
-            exit = False
             match option:
                 case "1":
                     print("Change difficulty coming")
@@ -383,9 +193,6 @@ def show_custom_difficulties():
                 case "4":
                     main_menu()
                     break
-                        
-            if exit:
-                break
         else:
             print("Please select the correct option")
 
@@ -468,6 +275,9 @@ def show_settings():
     clear_console()
 
 def welcome():
+    '''
+    Prints the welcome logo
+    '''
     print('''    _   __                __                 ______                     _            
    / | / /_  ______ ___  / /_  ___  _____   / ____/_  _____  __________(_)___  ____ _
   /  |/ / / / / __ `__ \/ __ \/ _ \/ ___/  / / __/ / / / _ \/ ___/ ___/ / __ \/ __ `/
@@ -494,7 +304,6 @@ Select one option:
     while True:
         option = input("Select: ")
         if re.search(OPTION_REGEX, option):
-            exit = False
             match option:
                 case "2":
                     show_rules(main_menu)
@@ -510,15 +319,11 @@ Select one option:
                         exit_survey = input("Do want to exit the game? Y/N\n")
                         if re.search("^[yY]{1}(es)?$", exit_survey):
                             print("Goodbye")
-                            exit = True
                             break
                         elif re.search("^[nN]{1}(o)?$", exit_survey):
                             break
                         else:
                             print("Incorrect input")
-                        
-            if exit:
-                break
         else:
             print("Please select the correct option")
 
