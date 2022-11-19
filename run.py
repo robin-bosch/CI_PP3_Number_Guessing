@@ -4,26 +4,13 @@ import re
 import os
 
 from classes.ComputerGuessingGame import ComputerGuessingGame
+from classes.Difficulty import Difficulty
 from classes.User import User
 from classes.UserGuessingGame import UserGuessingGame
 from utils.inputs import take_text_input, yes_no
 from utils.worksheet import USER_LIST
 
 
-# from game import ComputerGuesserGame, UserGuesserGame
-
-
-
-
-
-class Difficulty():
-    '''
-    Creates a difficulty
-    '''
-    def __init__(self, rounds, min_value, max_value):
-        self.rounds = rounds
-        self.min_value = min_value
-        self.max_value = max_value
 
 _DIFFICULTIES = {
     "easy": Difficulty(5, 0 ,15),
@@ -54,7 +41,7 @@ def start_game():
 1. Computer guesses
 2. User guesses
 3. Back to main menu''')
-            option = input("Select: ")
+            option = input("Select:\n")
             if re.search(OPTION_REGEX, option):
                 match option:
                     case "1":
