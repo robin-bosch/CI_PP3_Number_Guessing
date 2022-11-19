@@ -45,7 +45,10 @@ def is_logged_in() -> bool:
     return False if ACTIVE_USER is None else True
 
 def start_game():
-    if is_logged_in():
+    '''
+    Creates game
+    '''
+    if login():
         while True:
             print('''Select one option:
 1. Computer guesses
@@ -67,14 +70,7 @@ def start_game():
             else:
                 print("Please select the correct option")
     else:
-        print("You are not logged in")
-        login_prompt = yes_no("You need to login to play, do you want to login? Y/N\n")
-
-        if login_prompt:
-            login()
-            start_game()
-        else:
-            main_menu()
+        main_menu()
 
 
 
@@ -87,57 +83,51 @@ def login() -> bool:
 
     if not is_logged_in():
 
-        registered = yes_no("Are you registered? Y/N\n")
+        print('''You need to be logged in to access this area.\n
+1. Log In
+2. Register
+3. Retun to the main menu        
+        ''')
 
-        if registered:
+        while True:
+            user_choice = input("Select:\n")
 
-            username = take_text_input("Please enter your username", USERNAME_REGEX, "Your username must be 3-100 Characters long and can only contain alphanumeric values (A-Z and 0-9)")
-            email = take_text_input("Please enter your email", EMAIL_REGEX, "Invalid email address, please enter a valid email address")
-            # # Take username input
-            # while True:
-            #     username = input("Please enter your username:\n")
-            #     if re.match(USERNAME_REGEX, username):
-            #         break
-            #     else:
-            #         print("Your username must be 3-100 Characters long and can only contain alphanumeric values (A-Z and 0-9)")
-            # # Take email input
-            # while True:
-            #     email = input("Please enter your email:\n")
-            #     if re.match(EMAIL_REGEX, email):
-            #         break
-            #     else:
-            #         print("Please enter a valid email address")
+            if re.search("^[1-3]{1}$", user_choice):
+                match user_choice:
+                    case "1":
+                        username = take_text_input("Please enter your username", USERNAME_REGEX, "Your username must be 3-100 Characters long and can only contain alphanumeric values (A-Z and 0-9)")
+                        email = take_text_input("Please enter your email", EMAIL_REGEX, "Invalid email address, please enter a valid email address")
 
-            # usersheet = SHEET.worksheet("user_list")
-            email_val = USER_LIST.find(email)
+                        email_val = USER_LIST.find(email)
 
-            if not email_val is None:
-                print("found")
-                userrow = USER_LIST.row_values(email_val.row)
-                ACTIVE_USER = User(email_val.row, userrow[0], userrow[1], userrow[2], userrow[3])
-                print(userrow)
+                        if not email_val is None:
+                            # Login user
+                            userrow = USER_LIST.row_values(email_val.row)
+                            ACTIVE_USER = User(email_val.row, userrow[0], userrow[1], userrow[2], userrow[3])
+                        else:
+                            #
+                            print("This user does not exist")
+                            print(f"username: {username}")
+                            print(f"email: {email}")
+
+                            if yes_no("Do you want to register with this data?"):
+                                USER_LIST.append_row([email, username, "{}", "easy"])
+                                userrow_num = USER_LIST.find(email)
+                                userrow_val = USER_LIST.row_values(userrow_num.row)
+                                ACTIVE_USER = User(userrow_num.row, userrow_val[0], userrow_val[1], userrow_val[2], userrow_val[3])
+                                return True
+                            else:
+                                # Returns to the login main screen
+                                login()
+                    case "2":
+                        show_register()
+                        return True
+                    case "3":
+                        main_menu()
+                        return False
             else:
-                print("This user does not exist")
-                print(f"username: {username}")
-                print(f"email: {email}")
-
-                if yes_no("Do you want to register with this data? Y/N\n"):
-                    print("Register")
-                    USER_LIST.append_row([email, username, "{}", "easy"])
-                    userrow_num = USER_LIST.find(email)
-                    userrow_val = USER_LIST.row_values(userrow_num.row)
-                    ACTIVE_USER = User(userrow_num.row, userrow_val[0], userrow_val[1], userrow_val[2], userrow_val[3])
-                    return True
-                else:
-                    print("Returning to the main menu")
-                    return False
-
-        #TODO: Check if user exists
-        print("login check if user exists")
-        return True
-    else:
-        print("Already logged in")
-        return False
+                print("Please select the correct option")
+    return True
 
 
 
@@ -145,25 +135,21 @@ def show_register():
     '''
     Register new user
     '''
-    username = ""
-    email = ""
-    while True:
-        username = input("Please enter a username (Your username can be changed later):\n")
-        if re.match(USERNAME_REGEX, username):
-            break
-        else:
-            print("Your username must be 3-100 Characters long and can only contain alphanumeric values (A-Z and 0-9)")
+    global ACTIVE_USER
 
-    while True:
-        email = input("Please enter your email:\n")
-        if re.match(EMAIL_REGEX, email):
-            break
-        else:
-            print("Please enter a valid email address")
+    username = take_text_input("Please enter a username (Your username can be changed later)", USERNAME_REGEX, "Your username must be 3-100 Characters long and can only contain alphanumeric values (A-Z and 0-9)")
+    email = take_text_input("Please enter your email", EMAIL_REGEX, "Invalid email address, please enter a valid email address")
 
+    email_val = USER_LIST.find(email)
 
-
-
+    if email_val is None:
+        USER_LIST.append_row([email, username, "{}", "easy"])
+        userrow_num = USER_LIST.find(email)
+        userrow_val = USER_LIST.row_values(userrow_num.row)
+        ACTIVE_USER = User(userrow_num.row, userrow_val[0], userrow_val[1], userrow_val[2], userrow_val[3])
+    else:
+        print("This user already exists please register as new user")
+        login()
 
 
 OPTION_REGEX = "^[1-5]{1}$"
@@ -236,43 +222,41 @@ def show_settings():
     '''
     Displays settings
     '''
-    global ACTIVE_USER
 
-    if ACTIVE_USER is None:
-        login()
-    
-    print("Welcome to the settings menu")
-    print(
+    if login():
+        print("Settings menu")
+
+
+        while True:
+            print(
 '''Select one option:
 1. Change difficulty
 2. Change username
 3. Manage custom difficulties
 4. Back to main menu''')
-
-    while True:
-        option = input("Select: ")
-        if re.search(OPTION_REGEX, option):
-            exit = False
-            match option:
-                case "1":
-                    print("Change difficulty coming")
+            option = input("Select: ")
+            if re.search(OPTION_REGEX, option):
+                exit = False
+                match option:
+                    case "1":
+                        print("Change difficulty coming")
+                        break
+                    case "2":
+                        change_username_setting()
+                        break
+                    case "3":
+                        show_custom_difficulties()
+                        break
+                    case "4":
+                        main_menu()
+                        break
+                            
+                if exit:
                     break
-                case "2":
-                    change_username_setting()
-                    break
-                case "3":
-                    show_custom_difficulties()
-                    break
-                case "4":
-                    main_menu()
-                    break
-                        
-            if exit:
-                break
-        else:
-            print("Please select the correct option")
-    main_menu()
-    clear_console()
+            else:
+                print("Please select the correct option")
+    else:
+        main_menu()
 
 def welcome():
     '''
