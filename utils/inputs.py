@@ -4,7 +4,6 @@
 # Section of input functions
 import re
 
-from run import main_menu
 
 
 def yes_no(question) -> bool:
@@ -27,6 +26,8 @@ def take_text_input(input_prompt, check_regex, failure_message) -> str:
     while True:
         input_val = input(input_prompt + " or exit to get back to the main menu:\n")
         if input_val == "exit":
+            #TODO: Is there a better solution to this circular import problem? Find one
+            from run import main_menu
             main_menu()
         elif re.match(check_regex, input_val):
             return input_val

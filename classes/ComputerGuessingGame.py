@@ -37,12 +37,12 @@ class ComputerGuessingGame(Game):
         else:
             if self.rounds_left > 0:
                 while True:
-                    hint_value = input("Is it the your number lower or higher")
+                    hint_value = input("Is it the your number lower or higher?\n")
 
-                    if re.match(hint_value, ComputerGuessingGame._LOWER_REGEX, re.IGNORECASE):
+                    if re.match(ComputerGuessingGame._LOWER_REGEX, hint_value, re.IGNORECASE):
                         self.guessed_max = random_number - 1
                         break
-                    elif re.match(hint_value, ComputerGuessingGame._HIGHER_REGEX, re.IGNORECASE):
+                    elif re.match(ComputerGuessingGame._HIGHER_REGEX, hint_value, re.IGNORECASE):
                         self.guessed_min = random_number + 1
                         break
                     else:
