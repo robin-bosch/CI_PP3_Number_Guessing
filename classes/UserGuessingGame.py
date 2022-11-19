@@ -42,6 +42,9 @@ class UserGuessingGame(Game):
             self.game_end(False)
 
     def game_end(self, user_won):
+        '''
+        Shows the game end screen
+        '''
         if user_won:
             print("Correct number! You won!")
         else:

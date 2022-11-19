@@ -11,7 +11,7 @@ def yes_no(question) -> bool:
     Display simple yes or no question in the terminal
     '''
     while True:
-        register = input(question)
+        register = input(question + "Y/N\n")
         if re.search("^[yY]{1}(es)?$", register):
             return True
         elif re.search("^[nN]{1}(o)?$", register):
