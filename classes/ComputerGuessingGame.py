@@ -16,7 +16,15 @@ class ComputerGuessingGame(Game):
         self.guessed_min = self.difficulty.min_value
 
     def prepare_game(self):
-        self.number = random.randrange(self.difficulty.min_value, self.difficulty.max_value)
+        set_number = None
+        while True:
+            set_number = input(f"Please put in a number between {self.difficulty.min} and {self.difficulty.max}:")
+
+            if set_number >= self.difficulty.min and set_number <= self.difficulty.max:
+                break
+            else:
+                print(f"Invalid number: Your number must be between {self.difficulty.min} and {self.difficulty.max}:")
+            self.number = set_number
 
     _LOWER_REGEX = "^(lower|l)$"
     _HIGHER_REGEX = "^(higher|h)$"
