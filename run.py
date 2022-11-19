@@ -91,6 +91,7 @@ def login() -> bool:
                             # Login user
                             userrow = USER_LIST.row_values(email_val.row)
                             ACTIVE_USER = User(email_val.row, userrow[0], userrow[1], userrow[2], userrow[3])
+                            return True
                         else:
                             #
                             print("This user does not exist")

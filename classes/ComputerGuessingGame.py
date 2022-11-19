@@ -65,7 +65,7 @@ class ComputerGuessingGame(Game):
                         self.guessed_min = random_number + 1
                         break
                     else:
-                        print("Lower or higher? Please use a correct value to give a hint to the computer")
+                        print("Lower or higher? Please use a correct value to give me a hint")
 
                 self.rounds_left = self.rounds_left-1
 
@@ -84,10 +84,10 @@ class ComputerGuessingGame(Game):
             print("I won, yay!")
 
         while True:
-            print('''Do you want to play another round or do you want to go back to the menu?
+            print('''Do you want to play another round or do you want to go back to the menu?\n
 1. Play again
 2. Back to the menu''')
-            user_selection = print("Select: ")
+            user_selection = input("Select: ")
             if re.search("^[1-2]{1}$", user_selection):
                 match user_selection:
                     case "1":
