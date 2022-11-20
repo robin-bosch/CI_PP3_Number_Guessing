@@ -30,9 +30,8 @@
 7. [Bugs](#bugs)
 8. [Deployment](#deployment)
 9. [Credits](#credits)
-    1. [Media](#media)
-    2. [Code](#code)
-    3. [Acknowledgements](#acknowledgements)
+    1. [Code](#code)
+    2. [Acknowledgements](#acknowledgements)
 10. [License](#license)
 
 ## Project Goals
@@ -82,6 +81,27 @@ As a user I want to:
 
 ### Data Models
 
+This project is structured into several different modules that can be imported
+with the following folder structure:
+
+- classes
+- utils
+
+Utils contain function packages
+
+The following classes are available:
+
+- Game (abstract)
+  - UserGuessingGame
+  - ComputerGuessingGame
+- User
+- Difficulty
+  - CustomDifficulty
+
+A Guesser Enum is available to determine Guesser type game.
+
+The navigation is done by calling different menus. The game is packaged into one object which then runs itself to the end.
+
 ## Features
 
 ## Technologies Used
@@ -107,6 +127,24 @@ As a user I want to:
 ## Validation and Testing
 
 ### Python Validation
+
+Python validation was done with pycodestyle linter
+The linter showed no errors or other problems
+
+#### Python validation locally
+
+1. Install pycodestyle
+
+```python
+pip3 install pycodestyle
+```
+
+2. Select pycodestyle as linter
+
+<details>
+ <summary>Screenshot from console</summary>
+ <img src="docs/python-validation.png">
+</details>
 
 ### Testing user stories
 
@@ -150,9 +188,10 @@ You can clone the repository by following these steps:
 
 ## Credits
 
-### Media
-
 ### Code
+
+- [ASCII art generator](http://patorjk.com/software/taag/)
+- [Console clear function](https://stackoverflow.com/questions/517970/how-to-clear-the-interpreter-console)
 
 ### Acknowledgements
 
