@@ -22,14 +22,14 @@ class User():
         worksheet.USER_LIST.update_cell(self.row, 2, username)
         self.username = username
 
-    def update_custom_difficulties(self, custom_difficulties):
+    def update_custom_difficulties(self, username, name, rounds, min, max):
         '''
         Updates custom made difficulties and saves it to the spreadsheet
         @param self
         @param custom_difficulties
         '''
-        # TODO: Add saving to spreadsheet and check custom difficulty validity
-        self.custom_difficulties = custom_difficulties
+        worksheet.add_custom_difficulty_row(username, name, rounds, min, max)
+        self.custom_difficulties = worksheet.get_custom_difficulty_list(self.email)
 
     def update_current_difficulty(self, new_current_difficulty):
         '''

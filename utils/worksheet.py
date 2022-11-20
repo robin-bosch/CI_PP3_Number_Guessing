@@ -65,3 +65,24 @@ def query_user(email):
     else:
         # User does not exist
         return None
+
+
+def get_custom_difficulty_list(email):
+    '''
+    Gets the list with custom difficulties
+    '''
+    # Create custom difficulty list
+    custom_difficulty_query_list = CUSTOM_DIFFICULTIES.findall(email)
+
+    custom_difficulty_list = []
+
+    for item in custom_difficulty_query_list:
+        difficulty_row = CUSTOM_DIFFICULTIES.row_values(item.row)
+        custom_difficulty_list.append(CustomDifficulty(item.row, difficulty_row[1], difficulty_row[2], difficulty_row[3], difficulty_row[4]))
+
+
+def add_custom_difficulty_row(username, name, rounds, min, max):
+    '''
+    Adds the custom difficulty to the table
+    '''
+    CUSTOM_DIFFICULTIES.append_row(username, name, rounds, min, max)

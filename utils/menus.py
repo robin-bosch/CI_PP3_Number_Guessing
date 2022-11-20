@@ -6,6 +6,7 @@ import classes.UserGuessingGame as UserGuessingGame
 import run
 import utils.inputs as inputs
 import utils.login as login
+import utils.worksheet as worksheet
 
 
 OPTION_REGEX = "^[1-5]{1}$"
@@ -155,8 +156,53 @@ Max value: {str(custom_difficulties[option-1].max_value)}''')
             print("Please select the correct option")
 
 
+def custom_difficulty_get_number(prompt, min, max):
+    num_regex = "^[0-9]{1,6}$"
+    while True:
+        num_input = input(prompt + "\n")
+        if re.search(num_regex, num_input):
+            num_input = int(num_input)
+            if num_input > min and num_input < max:
+                return num_input
+            else:
+                print(f"Please enter a number between {min} and {max}")
+        elif num_input == "exit":
+            main_settings()
+        else:
+            print("Please enter a valid number in the positive range")
+
+
 def add_custom_difficulty():
-    print("Add")
+    '''
+    Adds custom difficulty
+    '''
+    custom_difficulty_list = user.get_user().custom_difficulties
+    name = ""
+    name_regex = "^[a-zA-Z]{3, 30}$"
+    while True:
+        name_input = input("Enter a name for you difficulty:\n")
+        if re.search(name_regex, name):
+            complete_difficulty_list = run._DIFFICULTIES + user.get_user().custom_difficulties
+            is_unique = True
+            for item in complete_difficulty_list:
+                if item.name == name_input:
+                    is_unique = False
+
+            if is_unique:
+                name = name_input
+                break
+            else:
+                print("You can't reuse a name for a difficulty")
+        elif name_input == "exit":
+            main_settings()
+        else:
+            print("Your difficulty name can only contain letters")
+
+    rounds = custom_difficulty_get_number("Please enter number of rounds:", 1, 99)
+    min_value = custom_difficulty_get_number("Please enter the minimum value:", 0, 999990)
+    max_value = custom_difficulty_get_number("Please enter the maximum value:", min_value+1, 999999)
+
+    user.get_user().update_custom_difficulties(user.get_user().email, name, rounds, min_value, max_value)
 
 
 def change_difficulty():
