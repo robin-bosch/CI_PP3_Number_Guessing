@@ -15,7 +15,7 @@
     1. [Target Audience](#target-audience)
     2. [User Requirements and Expectations](#user-requirements-and-expectations)
     3. [User Stories](#user-stories)
-    4. [User Manual](#user-manual)
+    4. [User Manual - How to play](#user-manual-how-to-play)
 3. [Technical Design](#technical-design)
     1. [Flowchart](#flowchart)
     2. [Data Models](#data-models)
@@ -77,7 +77,49 @@ As a user I want to:
 9. Set the difficulty
 10. Create my own difficulty
 
-### User Manual
+### User Manual - How to Play
+
+#### Navigation
+
+Navigation works by selecting the number of the option available
+
+#### Read rules and help
+
+The rules and help page can be accessed in the main menu
+
+#### Login
+
+The login screen appears when accessing the game start or the settings
+Choose Login if you are already registered otherwise choose register and enter your email address and preferred username
+The default difficulty is set to easy and can be changed in the settings
+
+#### Settings
+
+The settings can be accessed from the main menu
+You can change the username, the current difficulty or manage your custom difficulties
+
+#### Custom difficulty
+
+You can set your own difficulty for more variety. You can set the minimum and maximum number and the amount of rounds.
+You can create and delete your custom difficulties. Don't forget to select your custom difficulty before playing.
+
+#### How to Play
+
+Select Start game and login if necessary.
+Select your preferred game type.
+
+User guesses game:  
+The computer chooses a random number within the minimum and maximum range.
+You as the user have to guess this number, but you only have a limited amount of guesses.
+After every guess the computer gives you a hint if the number is lower or higher and you can guess again.
+If you get the number within the limited rounds you win. If you don't get it in time the computer wins.
+
+Computer guesses game:  
+The game is flipped. You select your random number within the minimum and maximum range.
+The computer tries to guess your number and you have to confirm or deny if the number is correct.
+You need to give the computer a hint after every guess. Tell the computer if your number is lower or higher.
+If the computer gets your number within the limited rounds, the computer wins. If the computer can't guess the number in time, you win!
+Don't lie to the computer if it gets your number though!
 
 ## Technical Design
 
