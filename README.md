@@ -114,6 +114,89 @@ The navigation is done by calling different menus. The game is packaged into one
 
 ## Features
 
+The app has 9 features in total
+
+### Main menu
+
+- Shows the main menu
+- Contains the following options:
+    - Start game
+    - Rules
+    - Help
+    - Settings
+    - Exit
+- User stories covered: 1, 2, 3
+
+![Main menu](docs/features/main-menu.png)
+
+### Rules page
+
+- Shows the rules
+- Directly accessible from the main menu
+- Navigates back to the main menu
+- User stories covered: 2
+
+![Rules page](docs/features/rules-page.png)
+
+### Help page
+
+- Shows the help
+- Directly accessible from the main menu
+- Navigates back to the main menu
+- User stories covered: 3
+
+![Help page](docs/features/help-page.png)
+
+### Login menu
+
+- Shows the login and register options
+- Allows the user to register
+- User stories covered: 6, 7
+
+![Login menu](docs/features/login-menu.png)
+
+### Settings menu
+
+- Shows the settings available
+- Allows the change of the username, managing of the custom difficulties and change the difficulty
+- User stories covered: 8, 9, 10
+
+![Settings menu](docs/features/settings-menu.png)
+
+### Manage custom difficulties
+
+- Allows for creating and deleting custom difficulties 
+- Lists all custom difficulties
+- User stories covered: 10
+
+![Manage custom difficulties](docs/features/manage-custom-difficulties.png)
+
+### Game start
+
+- Shows game start
+- Choose between the two game types: User guesses, Computer guesses
+- User stories covered: 1, 4, 5
+
+![Game start](docs/features/game-start.png)
+
+### Game computer guessing
+
+- User sets a random number
+- Computer guesses number
+- User gives hint to computer
+- User stories covered: 5
+
+![Game computer guessing](docs/features/game-computer-guessing.png)
+
+### Game user guessing
+
+- Computer sets a random number
+- User guesses number
+- Computer gives hint to user
+- User stories covered: 4
+
+![Game user guessing](docs/features/game-user-guessing.png)
+
 ## Technologies Used
 
 ### Languages
