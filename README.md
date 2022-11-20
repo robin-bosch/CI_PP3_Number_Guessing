@@ -2,37 +2,42 @@
 
 (Developer: Robin Bosch)
 
-![Mockup Number Guessing](docs/mockup/mockup.png)
+![Mockup Number Guessing](docs/mockup.png)
 
-[View live site]("https://ci-pp3-number-guessing.herokuapp.com/")
+[View live site](https://ci-pp3-number-guessing.herokuapp.com/)
 
 ## Table of Contents
 
-1. [Project Goals](#project-goals)
+1. [About](#about)
+2. [Project Goals](#project-goals)
     1. [User Goals](#user-goals)
     2. [Site Owner Goals](#site-owner-goals)
-2. [User Experience](#user-experience)
+3. [User Experience](#user-experience)
     1. [Target Audience](#target-audience)
     2. [User Requirements and Expectations](#user-requirements-and-expectations)
     3. [User Stories](#user-stories)
-    4. [User Manual - How to play](#user-manual-how-to-play)
-3. [Technical Design](#technical-design)
+    4. [User Manual - How to play](#user-manual---how-to-play)
+4. [Technical Design](#technical-design)
     1. [Flowchart](#flowchart)
     2. [Data Models](#data-models)
-4. [Features](#features)
-5. [Technologies Used](#technologies-used)
+5. [Features](#features)
+6. [Technologies Used](#technologies-used)
     1. [Languages](#languages)
     2. [Libraries](#libraries)
     3. [Tools](#tools)
-6. [Validation and Testing](#validation-and-testing)
+7. [Validation and Testing](#validation-and-testing)
     1. [Python Validation](#python-validation)
     2. [Testing user stories](#testing-user-stories)
-7. [Bugs](#bugs)
-8. [Deployment](#deployment)
-9. [Credits](#credits)
+8. [Bugs](#bugs)
+9. [Deployment](#deployment)
+10. [Credits](#credits)
     1. [Code](#code)
     2. [Acknowledgements](#acknowledgements)
-10. [License](#license)
+11. [License](#license)
+
+## About
+
+Number Guessing is a small game where the user or computer guesses a random number. The user can plays against the computer. The user logs in to the app and is remembered by username and email. There are several difficulties and the user can create their own difficulties.
 
 ## Project Goals
 
@@ -291,25 +296,11 @@ pip3 install pycodestyle
 |---|---|---|---|
 Start game option|Select option 1 in the start menu and login if necessary|Game starts|Works as expected|
 
-<details>
- <summary>Screenshot</summary>
-<img src="docs/user-stories/first-story-one.png">
- <br>
- <img src="docs/user-stories/first-story-two.png">
-</details>
-
 2. Know the rules
 
 |Feature|Action|Expected result|Actual result|
 |---|---|---|---|
 Rules page|Select option 2 in the start menu|Shows the rules|Works as expected|
-
-<details>
- <summary>Screenshot</summary>
- <img src="docs/user-stories/second-story-one.png">
- <br>
- <img src="docs/user-stories/second-story-two.png">
-</details>
 
 3. Want to get some help
 
@@ -317,24 +308,11 @@ Rules page|Select option 2 in the start menu|Shows the rules|Works as expected|
 |---|---|---|---|
 Help page|Select option 3 in the start menu|Shows the help|Works as expected|
 
-<details>
- <summary>Screenshot</summary>
- <img src="docs/user-stories/third-story-one.png">
- <br>
- <img src="docs/user-stories/second-story-two.png">
-</details>
-
 4. Play as guesser
 
 |Feature|Action|Expected result|Actual result|
 |---|---|---|---|
 Selecting user guesser at game start|Choose option 2 at the start of the game|Starts the with user as guesser|Works as expected|
-
-<details>
- <summary>Screenshot</summary>
- <img src="docs/user-stories/third-story.png">
-</details>
-
 
 5. Let the computer guess
 
@@ -342,21 +320,11 @@ Selecting user guesser at game start|Choose option 2 at the start of the game|St
 |---|---|---|---|
 Selecting computer guesser at game start|Choose option 1 at the start of the game|Starts the with computer as guesser|Works as expected|
 
-<details>
- <summary>Screenshot</summary>
- <img src="docs/user-stories/fourth-story.png">
-</details>
-
 6. Register myself
 
 |Feature|Action|Expected result|Actual result|
 |---|---|---|---|
 Register|Choose register in the login screen|Registers the user|Works as expected|
-
-<details>
- <summary>Screenshots</summary>
- <img src="docs/user-stories/fifth-story.png">
-</details>
 
 7. Login
 
@@ -364,25 +332,11 @@ Register|Choose register in the login screen|Registers the user|Works as expecte
 |---|---|---|---|
 Login|Choose login in the login screen|Logs in the user|Works as expected|
 
-<details>
- <summary>Screenshot</summary>
-  <img src="docs/user-stories/sixth-story-one.png">
- <br>
- <img src="docs/user-stories/sixth-story-two.png">
-</details>
-
 8. Change my username
 
 |Feature|Action|Expected result|Actual result|
 |---|---|---|---|
 Change username option in settings|Navigate to the settings and choose the change username option in the settings|Allows the user to change the username|Works as expected|
-
-<details>
- <summary>Screenshot</summary>
-  <img src="docs/user-stories/eigth-story-one.png">
- <br>
- <img src="docs/user-stories/eigth-story-two.png">
-</details>
 
 9. Set the difficulty
 
@@ -390,24 +344,11 @@ Change username option in settings|Navigate to the settings and choose the chang
 |---|---|---|---|
 Change difficulty in the settings|Navigate to the settings and choose the change difficulty option|Changes the difficulty|Works as expected|
 
-<details>
- <summary>Screenshot</summary>
- <img src="docs/user-stories/ninth-story.png">
-</details>
-
 10. Create my own difficulty
 
 |Feature|Action|Expected result|Actual result|
 |---|---|---|---|
 Add custom difficulty|Navigate to the settings and choose manage custom difficulties and then the add option|Adds a new custom difficulty|Works as expected|
-
-<details>
- <summary>Screenshot</summary>
-  <img src="docs/user-stories/tenth-story-one.png">
- <br>
- <img src="docs/user-stories/ninth-story-two.png">
-</details>
-
 
 ## Bugs
 
