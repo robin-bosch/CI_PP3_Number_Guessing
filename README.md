@@ -83,6 +83,12 @@ As a user I want to:
 
 ### Flowchart
 
+The following flowchart shows the structure and logic of the Number Guessing app.
+
+<details><summary>Open flowchart</summary>
+<img src="docs/flowchart.png">
+</details>
+
 ### Data Models
 
 This project is structured into several different modules that can be imported
