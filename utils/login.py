@@ -47,12 +47,6 @@ def login() -> bool:
             if re.search("^[1-3]{1}$", user_choice):
                 match user_choice:
                     case "1":
-                        username = inputs.take_text_input(
-                                   "Please enter your username",
-                                   USERNAME_REGEX,
-                                   "Your username must be 3-100 Characters \
-                                   long and can only contain alphanumeric \
-                                   values (A-Z and 0-9)")
                         email = inputs.take_text_input(
                                 "Please enter your email",
                                 EMAIL_REGEX,
@@ -65,27 +59,15 @@ def login() -> bool:
                             user.set_user(return_user)
                             return True
                         else:
-                            #
+                            # User does not exist
                             print("This user does not exist")
-                            print(f"username: {username}")
-                            print(f"email: {email}")
-
-                            if inputs.yes_no(
-                               "Do you want to register with this data?"):
-                                worksheet.USER_LIST.append_row([email,
-                                                                username,
-                                                                "easy"])
-                                user.set_user(worksheet.query_user(email))
-                                return True
-                            else:
-                                # Returns to the login main screen
-                                login()
+                            input("Press enter to return to the login screen")
+                            login()
                     case "2":
                         register()
                         return True
                     case "3":
                         menus.main_menu()
-                        return False
             else:
                 print("Please select the correct option")
     return True
