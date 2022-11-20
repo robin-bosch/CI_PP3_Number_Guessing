@@ -61,6 +61,19 @@
 
 ### User Stories
 
+As a user I want to:
+
+1. Start a game
+2. Know the rules
+3. Play as guesser
+4. Let the computer guess
+5. Know if I won
+6. Register myself
+7. Login
+8. Change my username
+9. Set the difficulty
+10. Create my own difficulty
+
 ### User Manual
 
 ## Technical Design
