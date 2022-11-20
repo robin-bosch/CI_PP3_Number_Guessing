@@ -15,7 +15,8 @@ _DIFFICULTIES = [
     Difficulty("extreme", 5, 0, 100)]
 
 
-# Code used: https://stackoverflow.com/questions/517970/how-to-clear-the-interpreter-console
+# Code used:
+# https://stackoverflow.com/questions/517970/how-to-clear-the-interpreter-console
 def clear_console():
     '''
     Clears console
@@ -27,11 +28,12 @@ def welcome():
     '''
     Prints the welcome logo
     '''
-    print('''    _   __                __                 ______                     _            
+    # Can't fix the line length error, as it would break the logo
+    print(r'''    _   __                __                 ______                     _
    / | / /_  ______ ___  / /_  ___  _____   / ____/_  _____  __________(_)___  ____ _
   /  |/ / / / / __ `__ \/ __ \/ _ \/ ___/  / / __/ / / / _ \/ ___/ ___/ / __ \/ __ `/
- / /|  / /_/ / / / / / / /_/ /  __/ /     / /_/ / /_/ /  __(__  |__  ) / / / / /_/ / 
-/_/ |_/\__,_/_/ /_/ /_/_.___/\___/_/      \____/\__,_/\___/____/____/_/_/ /_/\__, /  
+ / /|  / /_/ / / / / / / /_/ /  __/ /     / /_/ / /_/ /  __(__  |__  ) / / / / /_/ /
+/_/ |_/\__,_/_/ /_/ /_/_.___/\___/_/      \____/\__,_/\___/____/____/_/_/ /_/\__, /
                                                                             /____/   ''')
 
 

@@ -22,7 +22,7 @@ class UserGuessingGame(Game):
                 guessed_number = input("Guess the number:\n")
 
                 # Check
-                if re.match("^\d+$", guessed_number):
+                if re.match(r"^\d+$", guessed_number):
                     guessed_number = int(guessed_number)
                     if guessed_number <= self.difficulty.max_value and \
                        guessed_number >= self.difficulty.min_value:

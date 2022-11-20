@@ -22,9 +22,9 @@ class ComputerGuessingGame(Game):
         '''
         set_number = None
         while True:
-            set_number = input(f"Please put in a number between {self.difficulty.min_value} and {self.difficulty.max_value}:")
+            set_number = input(f"Please put in a number between {self.difficulty.min_value} and {self.difficulty.max_value}:\n")
 
-            if re.match("^\d+$", set_number):
+            if re.match(r"^\d+$", set_number):
                 set_number = int(set_number)
                 if set_number <= self.difficulty.max_value and set_number >= self.difficulty.min_value:
                     self.number = set_number
@@ -40,7 +40,7 @@ class ComputerGuessingGame(Game):
     def next_round(self):
         '''
         Next round of the computer guessing
-        Yes the computer could do this all by itself 
+        Yes the computer could do this all by itself
         but then it would be no fun!
         '''
         # Guesses number in the middle of the min and max value
@@ -58,7 +58,7 @@ class ComputerGuessingGame(Game):
         else:
             if self.rounds_left > 0:
                 while True:
-                    hint_value = input("Is it the your number lower or higher?\n")
+                    hint_value = input("Is your number lower or higher?\n")
 
                     if re.match(ComputerGuessingGame._LOWER_REGEX,
                                 hint_value, re.IGNORECASE):

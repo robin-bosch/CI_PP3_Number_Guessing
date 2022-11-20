@@ -74,7 +74,9 @@ def register():
     Register new user
     '''
     username = inputs.take_text_input("Please enter a username (Your username can be changed later)", USERNAME_REGEX, "Your username must be 3-100 Characters long and can only contain alphanumeric values (A-Z and 0-9)")
-    email = inputs.take_text_input("Please enter your email", EMAIL_REGEX, "Invalid email address, please enter a valid email address")
+    email = inputs.take_text_input("Please enter your email",
+                                   EMAIL_REGEX,
+                                   "Invalid email address, please enter a valid email address")
 
     email_val = USER_LIST.find(email)
 

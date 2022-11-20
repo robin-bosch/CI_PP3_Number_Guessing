@@ -94,6 +94,7 @@ def start_game():
     '''
     if login.login():
         while True:
+            print(f"Current difficulty: {user.get_user().current_difficulty.name}")
             print('''Select one option:
 1. Computer guesses
 2. User guesses

@@ -1,5 +1,6 @@
-# Section of input functions
 import re
+
+# custom imports
 import utils.menus as menus
 
 
@@ -22,7 +23,8 @@ def take_text_input(input_prompt, check_regex, failure_message) -> str:
     Takes the input with a given regex
     '''
     while True:
-        input_val = input(input_prompt + " or exit to get back to the main menu:\n")
+        input_val = input(input_prompt +
+                          " or exit to get back to the main menu:\n")
         if input_val == "exit":
             menus.main_menu()
         elif re.match(check_regex, input_val):
