@@ -39,7 +39,9 @@ class ComputerGuessingGame(Game):
 
     def next_round(self):
         '''
-        Next round of the computer guessing -> Yes the computer could do this all by itself but then it would be no fun!
+        Next round of the computer guessing
+        Yes the computer could do this all by itself 
+        but then it would be no fun!
         '''
         # Guesses number in the middle of the min and max value
         # with a deviation of +/- 20%
@@ -58,10 +60,12 @@ class ComputerGuessingGame(Game):
                 while True:
                     hint_value = input("Is it the your number lower or higher?\n")
 
-                    if re.match(ComputerGuessingGame._LOWER_REGEX, hint_value, re.IGNORECASE):
+                    if re.match(ComputerGuessingGame._LOWER_REGEX,
+                                hint_value, re.IGNORECASE):
                         self.guessed_max = random_number - 1
                         break
-                    elif re.match(ComputerGuessingGame._HIGHER_REGEX, hint_value, re.IGNORECASE):
+                    elif re.match(ComputerGuessingGame._HIGHER_REGEX,
+                                  hint_value, re.IGNORECASE):
                         self.guessed_min = random_number + 1
                         break
                     else:

@@ -5,7 +5,8 @@ class User():
     '''
     Creates currently active user
     '''
-    def __init__(self, row, email, username, custom_difficulties, current_difficulty):
+    def __init__(self, row, email, username,
+                 custom_difficulties, current_difficulty):
         self.row = row
         self.email = email
         self.username = username

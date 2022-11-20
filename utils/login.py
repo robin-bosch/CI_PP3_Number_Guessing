@@ -7,7 +7,7 @@ import classes.User as user
 
 OPTION_REGEX = "^[1-5]{1}$"
 USERNAME_REGEX = "^[a-zA-Z0-9]{3,100}$"
-EMAIL_REGEX = "^\S+@\S+\.\S+$"
+EMAIL_REGEX = r"^\S+@\S+\.\S+$"
 
 
 def is_logged_in() -> bool:
@@ -42,26 +42,7 @@ def login() -> bool:
                         return_user = worksheet.query_user(email)
 
                         if return_user is not None:
-                        # if not email_val is None:
-                            # Login user
-                            # userrow = USER_LIST.row_values(email_val.row)
-                            # user_difficulties = json.loads(userrow[2])
-
-                            # query_user(email)
-
-                            # print(user_difficulties)
-
-                            custom_difficulty_list = {}
-
-                            # for key in user_difficulties.items():
-                            #     print(user_difficulties[key])
-                            #     custom_difficulty_list[key] = Difficulty(user_difficulties[key][0], user_difficulties[key][1], user_difficulties[key][2])
-
-                            print(return_user)
-
                             user.set_user(return_user)
-
-                            print(user)
                             return True
                         else:
                             #
@@ -88,7 +69,6 @@ def login() -> bool:
             else:
                 print("Please select the correct option")
     return True
-
 
 
 # def show_register():

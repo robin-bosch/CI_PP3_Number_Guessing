@@ -36,11 +36,11 @@ def query_user(email):
         # Create custom difficulty list
         custom_difficulty_query_list = CUSTOM_DIFFICULTIES.findall(email)
 
-        create_custom_difficulty_list = []
+        custom_difficulty_list = []
 
         for item in custom_difficulty_query_list:
             difficulty_row = CUSTOM_DIFFICULTIES.row_values(item.row)
-            create_custom_difficulty_list.append(CustomDifficulty(item.row, difficulty_row[1], difficulty_row[2], difficulty_row[3], difficulty_row[4]))
+            custom_difficulty_list.append(CustomDifficulty(item.row, difficulty_row[1], difficulty_row[2], difficulty_row[3], difficulty_row[4]))
 
         # Find active difficulty
         active_difficulty = None
@@ -51,13 +51,14 @@ def query_user(email):
                 break
 
         if active_difficulty is None:
-            for item in create_custom_difficulty_list:
+            for item in custom_difficulty_list:
                 if item.name == userrow[2]:
                     active_difficulty = item
                     break
 
         from classes.User import User
-        return User(user_query.row, userrow[0], userrow[1], create_custom_difficulty_list, active_difficulty)
+        return User(user_query.row, userrow[0], userrow[1],
+                    custom_difficulty_list, active_difficulty)
         # for key in user_difficulties.items():
         #     print(user_difficulties[key])
         #     custom_difficulty_list[key] = Difficulty(user_difficulties[key][0], user_difficulties[key][1], user_difficulties[key][2])

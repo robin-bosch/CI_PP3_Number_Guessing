@@ -3,11 +3,8 @@ import random
 import re
 import os
 
-from classes.ComputerGuessingGame import ComputerGuessingGame
 from classes.Difficulty import Difficulty
-from classes.UserGuessingGame import UserGuessingGame
-from utils.inputs import take_text_input, yes_no
-import utils.worksheet as worksheet
+
 import utils.menus as menus
 
 

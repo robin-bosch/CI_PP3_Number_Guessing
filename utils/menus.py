@@ -1,8 +1,8 @@
 
 import re
 import classes.User as user
-from classes.ComputerGuessingGame import ComputerGuessingGame
-from classes.UserGuessingGame import UserGuessingGame
+import classes.ComputerGuessingGame as ComputerGuessingGame
+import classes.UserGuessingGame as UserGuessingGame
 import run
 import utils.inputs as inputs
 import utils.login as login
@@ -23,10 +23,9 @@ Welcome to NumberGuessing
 
 Select one option:
 1. Start game
-2. Help
-3. Rules
-4. Settings
-5. Exit
+2. Rules
+3. Settings
+4. Exit
     ''')
     while True:
         option = input("Select: ")
@@ -35,12 +34,10 @@ Select one option:
                 case "1":
                     start_game()
                 case "2":
-                    print("Help is coming! At some point...")
-                case "3":
                     show_rules(main_menu)
-                case "4":
+                case "3":
                     main_settings()
-                case "5":
+                case "4":
                     if inputs.yes_no("Do want to exit the game?"):
                         print("Goodbye")
                         break
@@ -62,11 +59,13 @@ def start_game():
             if re.search(OPTION_REGEX, option):
                 match option:
                     case "1":
-                        new_game = ComputerGuessingGame(user.get_user().current_difficulty)
+                        new_game = ComputerGuessingGame(
+                            user.get_user().current_difficulty)
                         new_game.start()
                         break
                     case "2":
-                        new_game = UserGuessingGame(user.get_user().current_difficulty)
+                        new_game = UserGuessingGame(
+                            user.get_user().current_difficulty)
                         new_game.start()
                         break
                     case "3":
@@ -84,10 +83,13 @@ def manage_custom_difficulties():
     custom_difficulties = user.get_user().custom_difficulties
 
     print("Choose a difficulty to delete or add a new one")
-    
+
     for index, item in enumerate(custom_difficulties):
-        print(f"{str(index+1)}. {item.name} - Rounds: {str(item.rounds)} - Min value: {str(item.min_value)} - Max value: {str(item.max_value)}")
-    
+        print(f'''{str(index+1)}. {item.name} - \
+Rounds: {str(item.rounds)} - \
+Min value: {str(item.min_value)} - \
+Max value: {str(item.max_value)}''')
+
     print(f"{str(len(custom_difficulties)+1)}. Add a new custom difficulty")
 
     custom_option_regex = "^[1-" + str(len(custom_difficulties)) + "]{1}$"
@@ -99,7 +101,11 @@ def manage_custom_difficulties():
             if option+2 == len(custom_difficulties):
                 main_settings()
             else:
-                print(f"{custom_difficulties[option-1].name} - Rounds: {str(custom_difficulties[option-1].rounds)} - Min value: {str(custom_difficulties[option-1].min_value)} - Max value: {str(custom_difficulties[option-1].max_value)}")
+                print(f'''{custom_difficulties[option-1].name} - \
+Rounds: {str(custom_difficulties[option-1].rounds)} - \
+Min value: {str(custom_difficulties[option-1].min_value)} - \
+Max value: {str(custom_difficulties[option-1].max_value)}''')
+
                 confirm_delete = inputs.yes_no("Do you want to delete this custom difficulty?")
 
                 if confirm_delete:
@@ -110,31 +116,33 @@ def manage_custom_difficulties():
             print("Please select the correct option")
 
 
+def add_custom_difficulty():
+
+
 def change_difficulty():
     '''
     Changes current difficulty
     '''
-    difficulty_list = user.get_user().custom_difficulties
-    for item in run._DIFFICULTIES:
-        print(f"1. {item.name} - Rounds: {item.rounds} - Min value: {item.min_value} - Max value: {item.max_value}")
+    difficulty_list = run._DIFFICULTIES
+    difficulty_list.append(user.get_user().custom_difficulties)
 
-    for key in user.get_user().custom_difficulties.keys():
-        print(f"1. {key} - Rounds: {difficulty_list[key].rounds} - Min value: {difficulty_list[key].min_value} - Max value: {difficulty_list[key].max_value}")
+    for index, item in enumerate(difficulty_list):
+        print(f"{str(index+1)}. {item.name} - Rounds: {item.rounds} - Min value: {item.min_value} - Max value: {item.max_value}")
 
 
-def show_rules(show_after):
+def rules():
     '''
     Displays rules than switches back to given screen after enter
     '''
     print("The rules")
     input("Press Enter to continue...")
-    show_after()
-    # clear_console()
+    main_menu()
 
 
 def change_username_setting():
     '''
-    Asks for new username and calls the update username function in the user object
+    Asks for new username and calls the update
+    username function in the user object
     '''
     while True:
         new_username = input("Please enter your new username:\n")
@@ -180,7 +188,7 @@ def main_settings():
                     case "4":
                         main_menu()
                         break
-                            
+
                 if exit:
                     break
             else:

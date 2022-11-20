@@ -24,15 +24,18 @@ class UserGuessingGame(Game):
                 # Check
                 if re.match("^\d+$", guessed_number):
                     guessed_number = int(guessed_number)
-                    if guessed_number <= self.difficulty.max_value and guessed_number >= self.difficulty.min_value:
+                    if guessed_number <= self.difficulty.max_value and \
+                       guessed_number >= self.difficulty.min_value:
                         self.rounds_left = self.rounds_left-1
                         if guessed_number == self.number:
                             self.game_end(True)
                         elif guessed_number < self.number:
-                            print("Not the number I picked!\nThe number is lower")
+                            print("Not the number I picked!")
+                            print("The number is lower!")
                             self.next_round()
                         else:
-                            print("Not the number I picked!\nThe number is higher")
+                            print("Not the number I picked!")
+                            print("The number is higher!")
                             self.next_round()
 
                     else:
@@ -77,4 +80,3 @@ class UserGuessingGame(Game):
         '''
         self.prepare_game()
         self.next_round()
-
