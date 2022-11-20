@@ -88,9 +88,20 @@ As a user I want to:
 
 ### Languages
 
-### Frameworks
+- Python
+
+### Libraries
+
+- [gspread](https://docs.gspread.org/en/latest/) - To manage the spreadsheet
+- [google oauth](https://google-auth.readthedocs.io/en/master/) - To connect to the google drive
 
 ### Tools
+
+- Git
+- GitHub
+- Heroku - to deploy the app
+- Pycodestyle - for validation
+- Diagrams.net - for the flowchart
 
 ## Validation and Testing
 
