@@ -28,8 +28,9 @@ Welcome to NumberGuessing
 Select one option:
 1. Start game
 2. Rules
-3. Settings
-4. Exit
+3. Help
+4. Settings
+5. Exit
     ''')
     while True:
         option = input("Select: ")
@@ -40,8 +41,10 @@ Select one option:
                 case "2":
                     rules()
                 case "3":
-                    main_settings()
+                    help()
                 case "4":
+                    main_settings()
+                case "5":
                     if inputs.yes_no("Do want to exit the game?"):
                         print("Goodbye")
                         quit()
@@ -80,7 +83,6 @@ _\ \  __/ |_| |_| | | | | (_| \__ \
                 match option:
                     case "1":
                         change_difficulty()
-                        break
                     case "2":
                         change_username_setting()
                         break
@@ -278,8 +280,38 @@ def rules():
     '''
     Displays rules than switches back to given screen after enter
     '''
-    print("The rules")
-    input("Press Enter to continue...")
+    print("--- The rules ---")
+    print("The rules are pretty simple:\n\
+As a guesser:\n\
+The computer has selected a random number within a given range. \
+Guess the number, before you run out of rounds. \
+The computer gives you hints if your number is \
+lower or higher, than your guess.\
+\n\n\
+The computer is guessing:\n\
+Choose a number within the allowed difficulty range. \
+The computer guesses your number. Tell the computer \
+if it is correct and help it with a lower or higher hint. \
+You have won when the computer hasn't guessed your \
+number after all rounds are played")
+    input("Understood? Press Enter to go back to the menu...")
+    main_menu()
+
+
+def help():
+    '''
+    Displays a little help
+    '''
+    print("--- Help ---")
+    print("Navigate yourself through the menus by selecting an option, \
+typing in the number in the terminal. \
+You can exit when you are required to give a text input by typing 'exit'. \
+This doesn't work when you are required to select an option.\n\
+Small extra hints:\n\
+- Y/N questions can be answered by the shorthand or the full word (yes/no)\n\
+- The lower or higher hint during the game can be shortened \
+by just typing l or h for lower or higher")
+    input("All clear? Press Enter to go back to the menu...")
     main_menu()
 
 
