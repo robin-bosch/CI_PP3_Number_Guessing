@@ -58,6 +58,10 @@
 
 ### User Requirements and Expectations
 
+- Easy to navigate
+- Can complete multiple games
+- Allows for customization in the settings
+
 ### User Stories
 
 As a user I want to:
