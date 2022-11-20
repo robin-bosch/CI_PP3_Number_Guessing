@@ -14,7 +14,7 @@ _DIFFICULTIES = [
 
 # Code used:
 # https://stackoverflow.com/questions/517970/how-to-clear-the-interpreter-console
-def clear_console():
+def clear():
     '''
     Clears console
     '''

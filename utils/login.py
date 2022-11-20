@@ -1,8 +1,12 @@
+
 import re
+
+# Custom imports
+import run
+import classes.User as user
 import utils.inputs as inputs
 import utils.worksheet as worksheet
 import utils.menus as menus
-import classes.User as user
 
 
 OPTION_REGEX = "^[1-5]{1}$"
@@ -21,10 +25,18 @@ def login() -> bool:
     '''
     Logs user in
     '''
-
     if not is_logged_in():
 
         while True:
+            run.clear()
+            print(r'''
+   __             _
+  / /  ___   __ _(_)_ __
+ / /  / _ \ / _` | | '_ \
+/ /__| (_) | (_| | | | | |
+\____/\___/ \__, |_|_| |_|
+            |___/
+            ''')
             print('''You need to be logged in to access this area.\n
 1. Log In
 2. Register
@@ -35,8 +47,17 @@ def login() -> bool:
             if re.search("^[1-3]{1}$", user_choice):
                 match user_choice:
                     case "1":
-                        username = inputs.take_text_input("Please enter your username", USERNAME_REGEX, "Your username must be 3-100 Characters long and can only contain alphanumeric values (A-Z and 0-9)")
-                        email = inputs.take_text_input("Please enter your email", EMAIL_REGEX, "Invalid email address, please enter a valid email address")
+                        username = inputs.take_text_input(
+                                   "Please enter your username",
+                                   USERNAME_REGEX,
+                                   "Your username must be 3-100 Characters \
+                                   long and can only contain alphanumeric \
+                                   values (A-Z and 0-9)")
+                        email = inputs.take_text_input(
+                                "Please enter your email",
+                                EMAIL_REGEX,
+                                "Invalid email address, \
+                                please enter a valid email address")
 
                         return_user = worksheet.query_user(email)
 
@@ -49,7 +70,8 @@ def login() -> bool:
                             print(f"username: {username}")
                             print(f"email: {email}")
 
-                            if inputs.yes_no("Do you want to register with this data?"):
+                            if inputs.yes_no(
+                               "Do you want to register with this data?"):
                                 worksheet.USER_LIST.append_row([email,
                                                                 username,
                                                                 "easy"])
@@ -73,12 +95,17 @@ def register():
     '''
     Register new user
     '''
-    username = inputs.take_text_input("Please enter a username (Your username can be changed later)", USERNAME_REGEX, "Your username must be 3-100 Characters long and can only contain alphanumeric values (A-Z and 0-9)")
-    email = inputs.take_text_input("Please enter your email",
-                                   EMAIL_REGEX,
-                                   "Invalid email address, please enter a valid email address")
+    username = inputs.take_text_input(
+               "Please enter a username (Your username can be changed later)",
+               USERNAME_REGEX,
+               "Your username must be 3-100 Characters long and \
+               can only contain alphanumeric values (A-Z and 0-9)")
+    email = inputs.take_text_input(
+            "Please enter your email",
+            EMAIL_REGEX,
+            "Invalid email address, please enter a valid email address")
 
-    email_val = USER_LIST.find(email)
+    email_val = worksheet.USER_LIST.find(email)
 
     if email_val is None:
         worksheet.USER_LIST.append_row([email, username, "easy"])

@@ -50,7 +50,7 @@ class ComputerGuessingGame(Game):
         random_number = self.guessed_min + round(
                         ((self.guessed_max - self.guessed_min) / 2) *
                         random.uniform(0.8, 1.2))
-        
+
         # Computer guesses
         time.sleep(1)
         print(f"I am guessing: {random_number}? \n")

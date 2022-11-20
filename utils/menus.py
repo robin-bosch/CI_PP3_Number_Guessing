@@ -1,9 +1,11 @@
 
 import re
+
+# Custom imports
+import run
 import classes.User as user
 import classes.ComputerGuessingGame as ComputerGuessingGame
 import classes.UserGuessingGame as UserGuessingGame
-import run
 import utils.inputs as inputs
 import utils.login as login
 import utils.worksheet as worksheet
@@ -18,7 +20,7 @@ def main_menu():
     '''
     Displays main menu
     '''
-
+    run.clear()
     run.welcome()
     print('''
 Welcome to NumberGuessing
@@ -55,9 +57,18 @@ def main_settings():
     '''
 
     if login.login():
-        print("Settings menu")
+        run.clear()
+        print(r'''
+ __      _   _   _
+/ _\ ___| |_| |_(_)_ __   __ _ ___
+\ \ / _ \ __| __| | '_ \ / _` / __|
+_\ \  __/ |_| |_| | | | | (_| \__ \
+\__/\___|\__|\__|_|_| |_|\__, |___/
+                         |___/
+''')
 
         while True:
+            print(f"Hey {user.get_user().username}!")
             print('''Select one option:
 1. Change difficulty
 2. Change username
@@ -75,11 +86,8 @@ def main_settings():
                         break
                     case "3":
                         manage_custom_difficulties()
-                        break
                     case "4":
                         main_menu()
-                        break
-
                 if exit:
                     break
             else:
@@ -94,7 +102,9 @@ def start_game():
     '''
     if login.login():
         while True:
-            print(f"Current difficulty: {user.get_user().current_difficulty.name}")
+            run.clear()
+            print(f"Current difficulty: \
+{user.get_user().current_difficulty.name}")
             print('''Select one option:
 1. Computer guesses
 2. User guesses
@@ -154,10 +164,14 @@ Rounds: {str(custom_difficulties[option-1].rounds)} - \
 Min value: {str(custom_difficulties[option-1].min_value)} - \
 Max value: {str(custom_difficulties[option-1].max_value)}''')
 
-                confirm_delete = inputs.yes_no("Do you want to delete this custom difficulty?")
+                confirm_delete = inputs.yes_no(
+                                 "Do you want to delete this custom \
+                                 difficulty?")
 
                 if confirm_delete:
-                    worksheet.delete_custom_difficulty_row(custom_difficulties[option-1].row)
+                    worksheet.delete_custom_difficulty_row(
+                        custom_difficulties[option-1].row)
+
                     update_user = user.get_user()
                     update_user.custom_difficulties = worksheet.get_custom_difficulty_list(update_user.email)
                     user.set_user(update_user)
@@ -193,7 +207,8 @@ def add_custom_difficulty():
     while True:
         name_input = input("Enter a name for you difficulty:\n")
         if re.search(name_regex, name_input):
-            complete_difficulty_list = run._DIFFICULTIES + user.get_user().custom_difficulties
+            complete_difficulty_list = run._DIFFICULTIES + \
+                user.get_user().custom_difficulties
             is_unique = True
             for item in complete_difficulty_list:
                 if item.name == name_input:
@@ -229,13 +244,14 @@ def change_difficulty():
     '''
     difficulty_list = run._DIFFICULTIES + user.get_user().custom_difficulties
 
-    print(difficulty_list)
-
-    custom_option_regex = "^[1-" + str(len(difficulty_list)) + "]{1}$"
+    custom_option_regex = "^[1-" + str(len(difficulty_list)+1) + "]{1}$"
 
     print("Select one difficulty:")
     for index, item in enumerate(difficulty_list):
-        print(f"{str(index+1)}. {item.name} - Rounds: {item.rounds} - Min value: {item.min_value} - Max value: {item.max_value}")
+        print(f"{str(index+1)}. {item.name} - \
+Rounds: {item.rounds} - \
+Min value: {item.min_value} - \
+Max value: {item.max_value}")
 
     print("7. Back to the settings menu")
 
@@ -246,10 +262,11 @@ def change_difficulty():
 
             print(option)
 
-            if option+2 == len(difficulty_list):
+            if option == len(difficulty_list)+1:
                 main_settings()
             else:
-                user.get_user().update_current_difficulty(difficulty_list[int(option)-1])
+                user.get_user().update_current_difficulty(
+                    difficulty_list[int(option)-1])
                 print("Difficulty set")
                 print(user.get_user().current_difficulty.name)
                 main_settings()
@@ -282,5 +299,5 @@ def change_username_setting():
             main_settings()
             break
         else:
-            print("Your username must be 3-100 Characters long and can only contain alphanumeric values (A-Z and 0-9)")
-
+            print("Your username must be 3-100 Characters long and \
+                  can only contain alphanumeric values (A-Z and 0-9)")

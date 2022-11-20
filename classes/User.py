@@ -29,7 +29,8 @@ class User():
         @param custom_difficulties
         '''
         worksheet.add_custom_difficulty_row(username, name, rounds, min, max)
-        self.custom_difficulties = worksheet.get_custom_difficulty_list(self.email)
+        self.custom_difficulties = worksheet.get_custom_difficulty_list(
+                                    self.email)
 
     def update_current_difficulty(self, new_current_difficulty):
         '''
@@ -37,7 +38,8 @@ class User():
         @param self
         @param current_difficulty
         '''
-        worksheet.USER_LIST.update_cell(self.row, 3, new_current_difficulty.name)
+        worksheet.USER_LIST.update_cell(self.row, 3,
+                                        new_current_difficulty.name)
         self.current_difficulty = new_current_difficulty
 
 

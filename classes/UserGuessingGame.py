@@ -55,9 +55,10 @@ class UserGuessingGame(Game):
             print(f"No more rounds left, you didn't get the number.\n I picked {self.number} as my random number")
 
         while True:
-            print('''Do you want to play another round or do you want to go back to the menu?\n
-1. Play again
-2. Back to the menu''')
+            print("Do you want to play another round \
+                  or do you want to go back to the menu?\n \
+                  1. Play again \
+                  2. Back to the menu")
             user_selection = input("Select: ")
             if re.search("^[1-2]{1}$", user_selection):
                 match user_selection:
@@ -72,7 +73,9 @@ class UserGuessingGame(Game):
         '''
         Prepares the game with a random number for the user to guess
         '''
-        self.number = random.randrange(self.difficulty.min_value, self.difficulty.max_value)
+        self.number = random.randrange(
+                        self.difficulty.min_value,
+                        self.difficulty.max_value)
 
     def start(self):
         '''
