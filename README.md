@@ -22,7 +22,7 @@
 4. [Features](#features)
 5. [Technologies Used](#technologies-used)
     1. [Languages](#languages)
-    2. [Frameworks](#frameworks)
+    2. [Libraries](#libraries)
     3. [Tools](#tools)
 6. [Validation and Testing](#validation-and-testing)
     1. [Python Validation](#python-validation)
@@ -152,3 +152,6 @@ You can clone the repository by following these steps:
 ### Acknowledgements
 
 ## License
+
+This project is published under the MIT license.  
+[License](/LICENSE.txt)
