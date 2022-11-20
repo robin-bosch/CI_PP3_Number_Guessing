@@ -74,6 +74,36 @@
 
 ## Deployment
 
+Heroku:
+
+1. Create an account at Heroku and login.
+2. Click the "Create new app" button on your dashboard, add app name and region.
+3. Click on the "Create app" button.
+4. Click on the "Settings" tab.
+5. Under "Config Vars" click "Reveal Config Vars" add your credentials as value with "CREDS" as key.
+6. Under "Buildpacks" click "Add buildpack" and then choose "Python" first and click "Save changes"
+7. Add a second buildpack "nodejs" and click "Save changes"
+8. Go to the "Deploy" tab and choose GitHub as your deployment method
+9. Connect your GitHub account
+10. Enter your repository name, search for it and click connect when it appears below.
+11. In the manual deploy section click "Deploy branch"
+12. Optional: You can enable automatic deploys if you want the app to automatically update
+
+You can fork the repository by following these steps:
+
+1. Go to the repository on GitHub  
+2. Click on the "Fork" button in the upper right hand corner
+
+You can clone the repository by following these steps:
+
+1. Go to the repository on GitHub
+2. Locate the "Code" button above the list of files and click it  
+3. Select if you prefer to clone using HTTPS, SSH, or Github CLI and click the "copy" button to copy the URL to your clipboard
+4. Open Git Bash
+5. Change the current working directory to the one where you want the cloned directory
+6. Type git clone and paste the URL from the clipboard ($ git clone <https://github.com/YOUR-USERNAME/YOUR-REPOSITORY>)  
+7. Press Enter to create your local clone.
+
 ## Credits
 
 ### Media
