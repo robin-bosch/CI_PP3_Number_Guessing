@@ -69,7 +69,7 @@ class ComputerGuessingGame(Game):
         # If the user lies if the number is correct
         if not answer_correct and self.number == random_number:
             print("You liar! Someone told me that number is correct! \
-                  I am not playing with a cheater, back to the menu with you!")
+I am not playing with a cheater, back to the menu with you!")
             time.sleep(5)
             menus.main_menu()
 

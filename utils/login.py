@@ -52,7 +52,7 @@ def login() -> bool:
                                 "Please enter your email",
                                 EMAIL_REGEX,
                                 "Invalid email address, \
-                                please enter a valid email address")
+please enter a valid email address")
 
                         return_user = worksheet.query_user(email)
 
@@ -96,4 +96,5 @@ def register():
         user.set_user(worksheet.query_user(email))
     else:
         print("This user already exists please register as new user")
+        time.sleep(2)
         login()

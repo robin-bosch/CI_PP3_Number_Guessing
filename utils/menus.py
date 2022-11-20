@@ -168,7 +168,7 @@ Max value: {str(custom_difficulties[option-1].max_value)}''')
 
                 confirm_delete = inputs.yes_no(
                                  "Do you want to delete this custom \
-                                 difficulty?")
+difficulty?")
 
                 if confirm_delete:
                     worksheet.delete_custom_difficulty_row(
@@ -332,4 +332,4 @@ def change_username_setting():
             break
         else:
             print("Your username must be 3-100 Characters long and \
-                  can only contain alphanumeric values (A-Z and 0-9)")
+can only contain alphanumeric values (A-Z and 0-9)")
