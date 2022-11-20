@@ -10,7 +10,7 @@ import utils.login as login
 
 OPTION_REGEX = "^[1-5]{1}$"
 USERNAME_REGEX = "^[a-zA-Z0-9]{3,100}$"
-EMAIL_REGEX = "^\S+@\S+\.\S+$"
+EMAIL_REGEX = r"^\S+@\S+\.\S+$"
 
 
 def main_menu():
@@ -34,15 +34,54 @@ Select one option:
                 case "1":
                     start_game()
                 case "2":
-                    show_rules(main_menu)
+                    show_rules()
                 case "3":
                     main_settings()
                 case "4":
                     if inputs.yes_no("Do want to exit the game?"):
                         print("Goodbye")
-                        break
+                        quit()
         else:
             print("Please select the correct option")
+
+
+def main_settings():
+    '''
+    Displays settings
+    '''
+
+    if login.login():
+        print("Settings menu")
+
+        while True:
+            print('''Select one option:
+1. Change difficulty
+2. Change username
+3. Manage custom difficulties
+4. Back to main menu''')
+            option = input("Select: ")
+            if re.search(OPTION_REGEX, option):
+                exit = False
+                match option:
+                    case "1":
+                        change_difficulty()
+                        break
+                    case "2":
+                        change_username_setting()
+                        break
+                    case "3":
+                        manage_custom_difficulties()
+                        break
+                    case "4":
+                        main_menu()
+                        break
+
+                if exit:
+                    break
+            else:
+                print("Please select the correct option")
+    else:
+        main_menu()
 
 
 def start_game():
@@ -59,12 +98,12 @@ def start_game():
             if re.search(OPTION_REGEX, option):
                 match option:
                     case "1":
-                        new_game = ComputerGuessingGame(
+                        new_game = ComputerGuessingGame.ComputerGuessingGame(
                             user.get_user().current_difficulty)
                         new_game.start()
                         break
                     case "2":
-                        new_game = UserGuessingGame(
+                        new_game = UserGuessingGame.UserGuessingGame(
                             user.get_user().current_difficulty)
                         new_game.start()
                         break
@@ -117,17 +156,41 @@ Max value: {str(custom_difficulties[option-1].max_value)}''')
 
 
 def add_custom_difficulty():
+    print("Add")
 
 
 def change_difficulty():
     '''
     Changes current difficulty
     '''
-    difficulty_list = run._DIFFICULTIES
-    difficulty_list.append(user.get_user().custom_difficulties)
+    difficulty_list = run._DIFFICULTIES + user.get_user().custom_difficulties
 
+    print(difficulty_list)
+
+    custom_option_regex = "^[1-" + str(len(difficulty_list)) + "]{1}$"
+
+    print("Select one difficulty:")
     for index, item in enumerate(difficulty_list):
         print(f"{str(index+1)}. {item.name} - Rounds: {item.rounds} - Min value: {item.min_value} - Max value: {item.max_value}")
+
+    print("7. Back to the settings menu")
+
+    while True:
+        option = input("Select: ")
+        if re.search(custom_option_regex, option):
+            option = int(option)
+
+            print(option)
+
+            if option+2 == len(difficulty_list):
+                main_settings()
+            else:
+                user.get_user().update_current_difficulty(difficulty_list[int(option)-1])
+                print("Difficulty set")
+                print(user.get_user().current_difficulty.name)
+                main_settings()
+        else:
+            print("Please select the correct option")
 
 
 def rules():
@@ -158,40 +221,4 @@ def change_username_setting():
             print("Your username must be 3-100 Characters long and can only contain alphanumeric values (A-Z and 0-9)")
 
 
-def main_settings():
-    '''
-    Displays settings
-    '''
 
-    if login.login():
-        print("Settings menu")
-
-        while True:
-            print('''Select one option:
-1. Change difficulty
-2. Change username
-3. Manage custom difficulties
-4. Back to main menu''')
-            option = input("Select: ")
-            if re.search(OPTION_REGEX, option):
-                exit = False
-                match option:
-                    case "1":
-                        change_difficulty()
-                        break
-                    case "2":
-                        change_username_setting()
-                        break
-                    case "3":
-                        manage_custom_difficulties()
-                        break
-                    case "4":
-                        main_menu()
-                        break
-
-                if exit:
-                    break
-            else:
-                print("Please select the correct option")
-    else:
-        main_menu()

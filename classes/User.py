@@ -31,14 +31,14 @@ class User():
         # TODO: Add saving to spreadsheet and check custom difficulty validity
         self.custom_difficulties = custom_difficulties
 
-    def update_current_difficulty(self, current_difficulty):
+    def update_current_difficulty(self, new_current_difficulty):
         '''
         Updates current difficulty and saves it to the spreadsheet
         @param self
         @param current_difficulty
         '''
-        worksheet.USER_LIST.update_cell(self.row, 4, current_difficulty)
-        self.current_difficulty = current_difficulty
+        worksheet.USER_LIST.update_cell(self.row, 3, new_current_difficulty.name)
+        self.current_difficulty = new_current_difficulty
 
 
 USER = None
