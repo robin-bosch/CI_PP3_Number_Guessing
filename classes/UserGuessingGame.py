@@ -30,9 +30,11 @@ class UserGuessingGame(Game):
             # Check for a digit
             if re.match(r"^\d+$", guessed_number):
                 guessed_number = int(guessed_number)
+
+                # Check if the guessed number in the range
                 if guessed_number <= self.difficulty.max_value and \
                    guessed_number >= self.difficulty.min_value:
-                    
+
                     if guessed_number == self.number:
                         self.game_end(True)
                     elif guessed_number < self.number:

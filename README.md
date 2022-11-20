@@ -112,6 +112,10 @@ As a user I want to:
 
 ## Bugs
 
+|Status|Bug|Fix|
+|---|---|---|
+||||
+
 ## Deployment
 
 Heroku:
