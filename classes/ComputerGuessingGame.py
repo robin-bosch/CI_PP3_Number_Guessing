@@ -23,7 +23,8 @@ class ComputerGuessingGame(Game):
         '''
         set_number = None
         while True:
-            set_number = input(f"Please put in a number between {self.difficulty.min_value} and {self.difficulty.max_value}:\n")
+            set_number = input(f"Please put in a number between \
+{self.difficulty.min_value} and {self.difficulty.max_value}:\n")
 
             if re.match(r"^\d+$", set_number):
                 set_number = int(set_number)
@@ -32,7 +33,8 @@ class ComputerGuessingGame(Game):
                     self.number = set_number
                     break
                 else:
-                    print(f"Please enter a number within the range of {self.difficulty.min_value} and {self.difficulty.max_value}")
+                    print(f"Please enter a number within the range of \
+{self.difficulty.min_value} and {self.difficulty.max_value}")
             else:
                 print("Please enter a valid number")
 

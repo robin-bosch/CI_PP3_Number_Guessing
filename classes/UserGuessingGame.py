@@ -39,7 +39,9 @@ class UserGuessingGame(Game):
                             self.next_round()
 
                     else:
-                        print(f"Please enter a number within the range of {self.difficulty.min_value} and {self.difficulty.max_value}")
+                        print(f"Please enter a number within the range of \
+{self.difficulty.min_value} and {self.difficulty.max_value}")
+
                 else:
                     print("Please enter a valid number")
         else:
@@ -52,7 +54,8 @@ class UserGuessingGame(Game):
         if user_won:
             print("Correct number! You won!")
         else:
-            print(f"No more rounds left, you didn't get the number.\n I picked {self.number} as my random number")
+            print(f"No more rounds left, you didn't get the number.\n \
+I picked {self.number} as my random number")
 
         while True:
             print("Do you want to play another round \

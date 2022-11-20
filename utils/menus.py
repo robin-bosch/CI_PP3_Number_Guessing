@@ -173,7 +173,8 @@ Max value: {str(custom_difficulties[option-1].max_value)}''')
                         custom_difficulties[option-1].row)
 
                     update_user = user.get_user()
-                    update_user.custom_difficulties = worksheet.get_custom_difficulty_list(update_user.email)
+                    update_user.custom_difficulties = \
+                        worksheet.get_custom_difficulty_list(update_user.email)
                     user.set_user(update_user)
                 else:
                     manage_custom_difficulties()
