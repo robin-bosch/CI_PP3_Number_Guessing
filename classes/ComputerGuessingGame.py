@@ -1,6 +1,9 @@
 import random
 import re
 import time
+
+# Custom imports
+import run
 from classes.Game import Game
 from utils.enums import Guesser
 import utils.inputs as inputs
@@ -47,11 +50,16 @@ class ComputerGuessingGame(Game):
         Yes the computer could do this all by itself
         but then it would be no fun!
         '''
+        run.clear()
         # Guesses number in the middle of the min and max value
         # with a deviation of +/- 20%
         random_number = self.guessed_min + round(
                         ((self.guessed_max - self.guessed_min) / 2) *
                         random.uniform(0.8, 1.2))
+
+        # Info for the user
+        print(f"Rounds left: {self.rounds_left} - Your number {self.number}")
+        self.rounds_left = self.rounds_left-1
 
         # Computer guesses
         time.sleep(1)
@@ -62,35 +70,35 @@ class ComputerGuessingGame(Game):
         if not answer_correct and self.number == random_number:
             print("You liar! Someone told me that number is correct! \
                   I am not playing with a cheater, back to the menu with you!")
+            time.sleep(5)
             menus.main_menu()
 
         # Answer is correct
         elif answer_correct:
             self.game_end(False)
         else:
+            while True:
+                hint_value = input("Is your number lower or higher?\n")
+
+                # Number is lower
+                if re.match(ComputerGuessingGame._LOWER_REGEX,
+                            hint_value, re.IGNORECASE):
+                    self.guessed_max = random_number - 1
+                    break
+
+                # Number is higher
+                elif re.match(ComputerGuessingGame._HIGHER_REGEX,
+                              hint_value, re.IGNORECASE):
+                    self.guessed_min = random_number + 1
+                    break
+
+                # Incorrect input
+                else:
+                    print("Lower or higher? \
+                            Please use a correct value to give me a hint")
+
+            # Decrease round counter by one and start the next round
             if self.rounds_left > 0:
-                while True:
-                    hint_value = input("Is your number lower or higher?\n")
-
-                    # Number is lower
-                    if re.match(ComputerGuessingGame._LOWER_REGEX,
-                                hint_value, re.IGNORECASE):
-                        self.guessed_max = random_number - 1
-                        break
-
-                    # Number is higher
-                    elif re.match(ComputerGuessingGame._HIGHER_REGEX,
-                                  hint_value, re.IGNORECASE):
-                        self.guessed_min = random_number + 1
-                        break
-
-                    # Incorrect input
-                    else:
-                        print("Lower or higher? \
-                              Please use a correct value to give me a hint")
-
-                # Decrease round counter by one and start the next round
-                self.rounds_left = self.rounds_left-1
                 self.next_round()
             else:
                 self.game_end(False)

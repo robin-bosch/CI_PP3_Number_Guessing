@@ -1,5 +1,6 @@
 
 import re
+import time
 
 # Custom imports
 import run
@@ -40,7 +41,7 @@ def login() -> bool:
             print('''You need to be logged in to access this area.\n
 1. Log In
 2. Register
-3. Retun to the main menu
+3. Return to the main menu
 ''')
             user_choice = input("Select:\n")
 
@@ -70,6 +71,7 @@ def login() -> bool:
                         menus.main_menu()
             else:
                 print("Please select the correct option")
+                time.sleep(2)
     return True
 
 
