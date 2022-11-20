@@ -4,7 +4,7 @@
 
 ![Mockup Number Guessing](docs/mockup/mockup.png)
 
-[View live site]("")
+[View live site]("https://ci-pp3-number-guessing.herokuapp.com/")
 
 ## Table of Contents
 
@@ -38,7 +38,16 @@
 
 ### User Goals
 
+- Play a fun little game
+- Be able to change the difficulty
+- Being able to login or register
+- Winning
+
 ### Site Owner Goals
+
+- Offer a fun game
+- Make sure that the user understands the rules
+- Give the user the possibility to customise their game
 
 ## User Experience
 
