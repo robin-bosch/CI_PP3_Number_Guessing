@@ -1,6 +1,6 @@
 import re
 
-# custom imports
+# Custom imports
 import utils.menus as menus
 
 
@@ -9,7 +9,7 @@ def yes_no(question) -> bool:
     Display simple yes or no question in the terminal
     '''
     while True:
-        register = input(question + "Y/N\n")
+        register = input(question + " Y/N\n")
         if re.search("^[yY]{1}(es)?$", register):
             return True
         elif re.search("^[nN]{1}(o)?$", register):

@@ -1,10 +1,7 @@
-import json
-import random
-import re
 import os
 
+# Custom imports
 from classes.Difficulty import Difficulty
-
 import utils.menus as menus
 
 
@@ -28,18 +25,18 @@ def welcome():
     '''
     Prints the welcome logo
     '''
-    # Can't fix the line length error, as it would break the logo
-    print(r'''    _   __                __                 ______                     _
-   / | / /_  ______ ___  / /_  ___  _____   / ____/_  _____  __________(_)___  ____ _
-  /  |/ / / / / __ `__ \/ __ \/ _ \/ ___/  / / __/ / / / _ \/ ___/ ___/ / __ \/ __ `/
- / /|  / /_/ / / / / / / /_/ /  __/ /     / /_/ / /_/ /  __(__  |__  ) / / / / /_/ /
-/_/ |_/\__,_/_/ /_/ /_/_.___/\___/_/      \____/\__,_/\___/____/____/_/_/ /_/\__, /
-                                                                            /____/   ''')
+    print(r'''
+    _   __                   ______
+   / | / /_  ______ ___     / ____/_  _____  __________
+  /  |/ / / / / __ `__ \   / / __/ / / / _ \/ ___/ ___/
+ / /|  / /_/ / / / / / /  / /_/ / /_/ /  __(__  |__  )
+/_/ |_/\__,_/_/ /_/ /_/   \____/\__,_/\___/____/____/
+''')
 
 
 def main():
     '''
-    Main
+    Run main menu
     '''
     menus.main_menu()
 
