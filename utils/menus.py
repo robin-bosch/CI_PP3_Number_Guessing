@@ -18,6 +18,7 @@ def main_menu():
     '''
     Displays main menu
     '''
+
     run.welcome()
     print('''
 Welcome to NumberGuessing
@@ -35,13 +36,15 @@ Select one option:
                 case "1":
                     start_game()
                 case "2":
-                    show_rules()
+                    rules()
                 case "3":
                     main_settings()
                 case "4":
                     if inputs.yes_no("Do want to exit the game?"):
                         print("Goodbye")
                         quit()
+                    else:
+                        main_menu()
         else:
             print("Please select the correct option")
 
@@ -205,11 +208,15 @@ def add_custom_difficulty():
         else:
             print("Your difficulty name can only contain letters")
 
-    rounds = custom_difficulty_get_number("Please enter number of rounds:", 1, 99)
-    min_value = custom_difficulty_get_number("Please enter the minimum value:", 0, 999990)
-    max_value = custom_difficulty_get_number("Please enter the maximum value:", min_value+1, 999999)
+    rounds = custom_difficulty_get_number("Please enter number of rounds:",
+                                          1, 99)
+    min_value = custom_difficulty_get_number("Please enter the minimum value:",
+                                             0, 999990)
+    max_value = custom_difficulty_get_number("Please enter the maximum value:",
+                                             min_value+1, 999999)
 
-    user.get_user().update_custom_difficulties(user.get_user().email, name, rounds, min_value, max_value)
+    user.get_user().update_custom_difficulties(user.get_user().email, name,
+                                               rounds, min_value, max_value)
 
     print("Your new difficulty has been added!")
     manage_custom_difficulties()

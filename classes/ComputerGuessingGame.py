@@ -87,9 +87,7 @@ class ComputerGuessingGame(Game):
             print("I won, yay!")
 
         while True:
-            print(
-                '''Do you want to play another round or do you 
-                want to go back to the menu?\n
+            print('''Do you want to play another round or do you want to go back to the menu?\n
                 1. Play again
                 2. Back to the menu''')
             user_selection = input("Select: ")

@@ -33,14 +33,8 @@ def query_user(email):
         # Login user
         userrow = USER_LIST.row_values(user_query.row)
 
-        # Create custom difficulty list
-        custom_difficulty_query_list = CUSTOM_DIFFICULTIES.findall(email)
-
-        custom_difficulty_list = []
-
-        for item in custom_difficulty_query_list:
-            difficulty_row = CUSTOM_DIFFICULTIES.row_values(item.row)
-            custom_difficulty_list.append(CustomDifficulty(item.row, difficulty_row[1], difficulty_row[2], difficulty_row[3], difficulty_row[4]))
+        # Get custom difficulty list
+        custom_difficulty_list = get_custom_difficulty_list(email)
 
         # Find active difficulty
         active_difficulty = None
@@ -59,9 +53,6 @@ def query_user(email):
         from classes.User import User
         return User(user_query.row, userrow[0], userrow[1],
                     custom_difficulty_list, active_difficulty)
-        # for key in user_difficulties.items():
-        #     print(user_difficulties[key])
-        #     custom_difficulty_list[key] = Difficulty(user_difficulties[key][0], user_difficulties[key][1], user_difficulties[key][2])
     else:
         # User does not exist
         return None
@@ -78,7 +69,13 @@ def get_custom_difficulty_list(email):
 
     for item in custom_difficulty_query_list:
         difficulty_row = CUSTOM_DIFFICULTIES.row_values(item.row)
-        custom_difficulty_list.append(CustomDifficulty(item.row, difficulty_row[1], difficulty_row[2], difficulty_row[3], difficulty_row[4]))
+        custom_difficulty_list.append(CustomDifficulty(item.row,
+                                                       difficulty_row[1],
+                                                       difficulty_row[2],
+                                                       difficulty_row[3],
+                                                       difficulty_row[4]))
+
+    return custom_difficulty_list
 
 
 def add_custom_difficulty_row(username, name, rounds, min, max):

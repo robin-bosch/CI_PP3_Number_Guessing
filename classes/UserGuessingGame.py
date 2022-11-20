@@ -31,11 +31,11 @@ class UserGuessingGame(Game):
                             self.game_end(True)
                         elif guessed_number < self.number:
                             print("Not the number I picked!")
-                            print("The number is lower!")
+                            print("The number is higher!")
                             self.next_round()
                         else:
                             print("Not the number I picked!")
-                            print("The number is higher!")
+                            print("The number is lower!")
                             self.next_round()
 
                     else:

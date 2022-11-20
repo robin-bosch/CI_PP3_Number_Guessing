@@ -14,9 +14,6 @@ _DIFFICULTIES = [
     Difficulty("hard", 5, 0, 50),
     Difficulty("extreme", 5, 0, 100)]
 
-USERNAME_REGEX = "^[a-zA-Z0-9]{3,100}$"
-EMAIL_REGEX = "^\S+@\S+\.\S+$"
-
 
 # Code used: https://stackoverflow.com/questions/517970/how-to-clear-the-interpreter-console
 def clear_console():
