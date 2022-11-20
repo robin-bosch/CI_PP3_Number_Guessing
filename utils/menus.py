@@ -202,7 +202,6 @@ def add_custom_difficulty():
     '''
     Adds custom difficulty
     '''
-    custom_difficulty_list = user.get_user().custom_difficulties
     name = ""
     name_regex = "^[a-zA-Z]{3,30}$"
     while True:
