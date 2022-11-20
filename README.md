@@ -102,6 +102,7 @@ As a user I want to:
 - Heroku - to deploy the app
 - Pycodestyle - for validation
 - Diagrams.net - for the flowchart
+- [Regex101](https://regex101.com/) - to test regex expressions
 
 ## Validation and Testing
 
@@ -150,6 +151,9 @@ You can clone the repository by following these steps:
 ### Code
 
 ### Acknowledgements
+
+- A special thanks to my mentor Mo Shami for his feedback and advice, especially on the documentation.
+- A thanks to the Code Institute for the great learning resources
 
 ## License
 
