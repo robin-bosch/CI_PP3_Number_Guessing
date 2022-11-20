@@ -68,9 +68,9 @@ As a user I want to:
 
 1. Start a game
 2. Know the rules
-3. Play as guesser
-4. Let the computer guess
-5. Know if I won
+3. Want to get some help
+4. Play as guesser
+5. Let the computer guess
 6. Register myself
 7. Login
 8. Change my username
@@ -157,6 +157,132 @@ pip3 install pycodestyle
 </details>
 
 ### Testing user stories
+
+#### As a user I want to
+
+1. Start a game
+
+|Feature|Action|Expected result|Actual result|
+|---|---|---|---|
+Start game option|Select option 1 in the start menu and login if necessary|Game starts|Works as expected|
+
+<details>
+ <summary>Screenshot</summary>
+<img src="docs/user-stories/first-story-one.png">
+ <br>
+ <img src="docs/user-stories/first-story-two.png">
+</details>
+
+2. Know the rules
+
+|Feature|Action|Expected result|Actual result|
+|---|---|---|---|
+Rules page|Select option 2 in the start menu|Shows the rules|Works as expected|
+
+<details>
+ <summary>Screenshot</summary>
+ <img src="docs/user-stories/second-story-one.png">
+ <br>
+ <img src="docs/user-stories/second-story-two.png">
+</details>
+
+3. Want to get some help
+
+|Feature|Action|Expected result|Actual result|
+|---|---|---|---|
+Help page|Select option 3 in the start menu|Shows the help|Works as expected|
+
+<details>
+ <summary>Screenshot</summary>
+ <img src="docs/user-stories/third-story-one.png">
+ <br>
+ <img src="docs/user-stories/second-story-two.png">
+</details>
+
+4. Play as guesser
+
+|Feature|Action|Expected result|Actual result|
+|---|---|---|---|
+Selecting user guesser at game start|Choose option 2 at the start of the game|Starts the with user as guesser|Works as expected|
+
+<details>
+ <summary>Screenshot</summary>
+ <img src="docs/user-stories/third-story.png">
+</details>
+
+
+5. Let the computer guess
+
+|Feature|Action|Expected result|Actual result|
+|---|---|---|---|
+Selecting computer guesser at game start|Choose option 1 at the start of the game|Starts the with computer as guesser|Works as expected|
+
+<details>
+ <summary>Screenshot</summary>
+ <img src="docs/user-stories/fourth-story.png">
+</details>
+
+6. Register myself
+
+|Feature|Action|Expected result|Actual result|
+|---|---|---|---|
+Register|Choose register in the login screen|Registers the user|Works as expected|
+
+<details>
+ <summary>Screenshots</summary>
+ <img src="docs/user-stories/fifth-story.png">
+</details>
+
+7. Login
+
+|Feature|Action|Expected result|Actual result|
+|---|---|---|---|
+Login|Choose login in the login screen|Logs in the user|Works as expected|
+
+<details>
+ <summary>Screenshot</summary>
+  <img src="docs/user-stories/sixth-story-one.png">
+ <br>
+ <img src="docs/user-stories/sixth-story-two.png">
+</details>
+
+8. Change my username
+
+|Feature|Action|Expected result|Actual result|
+|---|---|---|---|
+Change username option in settings|Navigate to the settings and choose the change username option in the settings|Allows the user to change the username|Works as expected|
+
+<details>
+ <summary>Screenshot</summary>
+  <img src="docs/user-stories/eigth-story-one.png">
+ <br>
+ <img src="docs/user-stories/eigth-story-two.png">
+</details>
+
+9. Set the difficulty
+
+|Feature|Action|Expected result|Actual result|
+|---|---|---|---|
+Change difficulty in the settings|Navigate to the settings and choose the change difficulty option|Changes the difficulty|Works as expected|
+
+<details>
+ <summary>Screenshot</summary>
+ <img src="docs/user-stories/ninth-story.png">
+</details>
+
+10. Create my own difficulty
+
+|Feature|Action|Expected result|Actual result|
+|---|---|---|---|
+Add custom difficulty|Navigate to the settings and choose manage custom difficulties and then the add option|Adds a new custom difficulty|Works as expected|
+
+<details>
+ <summary>Screenshot</summary>
+  <img src="docs/user-stories/tenth-story-one.png">
+ <br>
+ <img src="docs/user-stories/ninth-story-two.png">
+</details>
+
 
 ## Bugs
 
