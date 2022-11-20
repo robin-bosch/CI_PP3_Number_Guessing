@@ -13,8 +13,9 @@
     2. [Site Owner Goals](#site-owner-goals)
 2. [User Experience](#user-experience)
     1. [Target Audience](#target-audience)
-    2. [User Stories](#user-stories)
-    3. [User Manual](#user-manual)
+    2. [User Requirements and Expectations](#user-requirements-and-expectations)
+    3. [User Stories](#user-stories)
+    4. [User Manual](#user-manual)
 3. [Technical Design](#technical-design)
     1. [Flowchart](#flowchart)
     2. [Data Models](#data-models)
@@ -52,6 +53,11 @@
 ## User Experience
 
 ### Target Audience
+
+- Everyone who wants to play a little game
+- People who want a simple game
+
+### User Requirements and Expectations
 
 ### User Stories
 
