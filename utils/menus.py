@@ -131,15 +131,19 @@ Min value: {str(item.min_value)} - \
 Max value: {str(item.max_value)}''')
 
     print(f"{str(len(custom_difficulties)+1)}. Add a new custom difficulty")
+    print(f"{str(len(custom_difficulties)+2)}. Back to the settings")
 
-    custom_option_regex = "^[1-" + str(len(custom_difficulties)) + "]{1}$"
+    custom_option_regex = "^[1-" + str(len(custom_difficulties)+2) + "]{1}$"
+
     while True:
         option = input("Select: ")
         if re.search(custom_option_regex, option):
             option = int(option)
 
-            if option+2 == len(custom_difficulties):
+            if option == len(custom_difficulties)+2:
                 main_settings()
+            if option == len(custom_difficulties)+1:
+                add_custom_difficulty()
             else:
                 print(f'''{custom_difficulties[option-1].name} - \
 Rounds: {str(custom_difficulties[option-1].rounds)} - \
@@ -149,7 +153,10 @@ Max value: {str(custom_difficulties[option-1].max_value)}''')
                 confirm_delete = inputs.yes_no("Do you want to delete this custom difficulty?")
 
                 if confirm_delete:
-                    print("Deleting")
+                    worksheet.delete_custom_difficulty_row(custom_difficulties[option-1].row)
+                    update_user = user.get_user()
+                    update_user.custom_difficulties = worksheet.get_custom_difficulty_list(update_user.email)
+                    user.set_user(update_user)
                 else:
                     manage_custom_difficulties()
         else:
@@ -178,10 +185,10 @@ def add_custom_difficulty():
     '''
     custom_difficulty_list = user.get_user().custom_difficulties
     name = ""
-    name_regex = "^[a-zA-Z]{3, 30}$"
+    name_regex = "^[a-zA-Z]{3,30}$"
     while True:
         name_input = input("Enter a name for you difficulty:\n")
-        if re.search(name_regex, name):
+        if re.search(name_regex, name_input):
             complete_difficulty_list = run._DIFFICULTIES + user.get_user().custom_difficulties
             is_unique = True
             for item in complete_difficulty_list:
@@ -203,6 +210,9 @@ def add_custom_difficulty():
     max_value = custom_difficulty_get_number("Please enter the maximum value:", min_value+1, 999999)
 
     user.get_user().update_custom_difficulties(user.get_user().email, name, rounds, min_value, max_value)
+
+    print("Your new difficulty has been added!")
+    manage_custom_difficulties()
 
 
 def change_difficulty():
@@ -265,6 +275,4 @@ def change_username_setting():
             break
         else:
             print("Your username must be 3-100 Characters long and can only contain alphanumeric values (A-Z and 0-9)")
-
-
 

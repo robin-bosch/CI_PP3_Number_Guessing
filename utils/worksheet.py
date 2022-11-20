@@ -85,4 +85,11 @@ def add_custom_difficulty_row(username, name, rounds, min, max):
     '''
     Adds the custom difficulty to the table
     '''
-    CUSTOM_DIFFICULTIES.append_row(username, name, rounds, min, max)
+    CUSTOM_DIFFICULTIES.append_row([username, name, rounds, min, max])
+
+
+def delete_custom_difficulty_row(row):
+    '''
+    Deletes a custom difficulty from the table
+    '''
+    CUSTOM_DIFFICULTIES.delete_rows(row)
