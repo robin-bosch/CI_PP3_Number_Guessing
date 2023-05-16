@@ -30,6 +30,9 @@
     2. [Testing user stories](#testing-user-stories)
 8. [Bugs](#bugs)
 9. [Deployment](#deployment)
+    1. [Forking and Cloning](#forking-and-cloning)
+    2. [Local deployment](#local-deployment)
+    3. [Deployment on Heroku](#deployment-on-heroku)
 10. [Credits](#credits)
     1. [Code](#code)
     2. [Acknowledgements](#acknowledgements)
@@ -276,7 +279,7 @@ The linter showed no errors or other problems
 1. Install pycodestyle
 
 ```python
-pip3 install pycodestyle
+pip install pycodestyle
 ```
 
 2. Select pycodestyle as linter
@@ -359,20 +362,7 @@ Add custom difficulty|Navigate to the settings and choose manage custom difficul
 
 ## Deployment
 
-Heroku:
-
-1. Create an account at Heroku and login.
-2. Click the "Create new app" button on your dashboard, add app name and region.
-3. Click on the "Create app" button.
-4. Click on the "Settings" tab.
-5. Under "Config Vars" click "Reveal Config Vars" add your credentials as value with "CREDS" as key.
-6. Under "Buildpacks" click "Add buildpack" and then choose "Python" first and click "Save changes"
-7. Add a second buildpack "nodejs" and click "Save changes"
-8. Go to the "Deploy" tab and choose GitHub as your deployment method
-9. Connect your GitHub account
-10. Enter your repository name, search for it and click connect when it appears below.
-11. In the manual deploy section click "Deploy branch"
-12. Optional: You can enable automatic deploys if you want the app to automatically update
+### Forking and Cloning
 
 You can fork the repository by following these steps:
 
@@ -388,6 +378,38 @@ You can clone the repository by following these steps:
 5. Change the current working directory to the one where you want the cloned directory
 6. Type git clone and paste the URL from the clipboard ($ git clone <https://github.com/YOUR-USERNAME/YOUR-REPOSITORY>)  
 7. Press Enter to create your local clone.
+
+### Local deployment
+
+1. Follow the steps for either cloning or forking the repository
+2. Run the following command to install all dependencies:
+
+```python
+pip install -r requirements.txt
+```
+
+3. You can start the program by typing the following command:
+
+```python
+python run.py
+```
+
+### Deployment on Heroku
+
+1. Create an account at Heroku and login.
+2. Click the "Create new app" button on your dashboard, add app name and region.
+3. Click on the "Create app" button.
+4. Click on the "Settings" tab.
+5. Under "Config Vars" click "Reveal Config Vars" add your credentials as value with "CREDS" as key.
+6. Under "Buildpacks" click "Add buildpack" and then choose "Python" first and click "Save changes"
+7. Add a second buildpack "nodejs" and click "Save changes"
+8. Go to the "Deploy" tab and choose GitHub as your deployment method
+9. Connect your GitHub account
+10. Enter your repository name, search for it and click connect when it appears below.
+11. In the manual deploy section click "Deploy branch"
+12. Optional: You can enable automatic deploys if you want the app to automatically update
+
+
 
 ## Credits
 
