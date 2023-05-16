@@ -66,7 +66,7 @@ class ComputerGuessingGame(Game):
         print(f"I am guessing: {random_number}? \n")
         answer_correct = inputs.yes_no("Is it correct?")
 
-        # If the user lies if the number is correct
+        # When the user lies if the number is correct
         if not answer_correct and self.number == random_number:
             print("You liar! Someone told me that number is correct! \
 I am not playing with a cheater, back to the menu with you!")
@@ -75,7 +75,7 @@ I am not playing with a cheater, back to the menu with you!")
 
         # Answer is correct
         elif answer_correct:
-            self.game_end(False)
+            self.game_end(True)
         else:
             while True:
                 hint_value = input("Is your number lower or higher?\n")
@@ -103,14 +103,15 @@ I am not playing with a cheater, back to the menu with you!")
             else:
                 self.game_end(False)
 
-    def game_end(self, user_won):
+    def game_end(self, computer_won):
         '''
         Shows the game end screen
+        Takes a boolean input if the computer won or not
         '''
-        if user_won:
-            print("Well you won I have no more guesses left, good job!")
-        else:
+        if computer_won:
             print("I won, yay!")
+        else:
+            print("Well you won I have no more guesses left, good job!")
 
         while True:
             print('''Play another round or back to the menu?\n

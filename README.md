@@ -354,7 +354,8 @@ Add custom difficulty|Navigate to the settings and choose manage custom difficul
 
 |Status|Bug|Fix|
 |---|---|---|
-||||
+|Fixed|The game crashes with a custom difficulty|Data type was incorrect when reading from the spreadsheet, type safety has been added to the difficulty class and type conversion when reading from the spreadsheet|
+|Fixed|Incorrect message when the computer ran out of rounds when guessing and lost the game|Swapped the user_won boolean to False|
 
 ## Deployment
 

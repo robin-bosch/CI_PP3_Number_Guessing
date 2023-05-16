@@ -71,9 +71,9 @@ def get_custom_difficulty_list(email):
         difficulty_row = CUSTOM_DIFFICULTIES.row_values(item.row)
         custom_difficulty_list.append(CustomDifficulty(item.row,
                                                        difficulty_row[1],
-                                                       difficulty_row[2],
-                                                       difficulty_row[3],
-                                                       difficulty_row[4]))
+                                                       int(difficulty_row[2]),
+                                                       int(difficulty_row[3]),
+                                                       int(difficulty_row[4])))
 
     return custom_difficulty_list
 

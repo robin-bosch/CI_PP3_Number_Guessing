@@ -55,9 +55,10 @@ def login() -> bool:
 please enter a valid email address")
 
                         return_user = worksheet.query_user(email)
-
+                        
                         if return_user is not None:
                             user.set_user(return_user)
+
                             return True
                         else:
                             # User does not exist
